@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PTS Registrar</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  
+  <style>
+
+
+  
+  </style>
+</head>
+<body class="bg-light">
+  {% include 'navbar.html' %}
+
+   <!-- Carousel -->
+  <section class="bg-light d-flex align-items-center scroll-section">
+    <div id="carouselExampleFade" class="carousel slide carousel-fade w-100" data-bs-ride="carousel">
+      <div class="carousel-inner">
+  
+      <!-- Slide 1 -->
+<div class="carousel-item active position-relative">
+  <img src="{% static 'images/registrar.png' %}" class="d-block w-100 object-fit-cover" style="max-height: 75vh;" alt="Registrar">
+
+  <!-- Dim entire slide if needed -->
+  <div class="dim-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+
+  <!-- Dim only the top (text area) -->
+  <div class="top-dim position-absolute top-0 start-0 w-100" style="height: 40vh;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent); z-index: 1;">
+  </div>
+
+  <!-- Text content -->
+  <div class="position-absolute top-50 start-10 text-white px-5 fade-in-left" style="z-index: 2;">
+    <h1 class="fw-bold display-4 display-md-2 display-lg-1 text-shadow" style="font-size:5rem;">Office of the Registrar</h1>
+    <h2 class="fs-5 fs-md-4 fs-lg-3 text-shadow">PTS College & Advanced Studies</h2>
+    <button 
+      class="btn btn-outline-light bg-transparent border-1 text-white"
+      onclick="window.location.href='{% url 'login' %}'">
+      Log in
+    </button>
+  </div>
+</div>
+
+  
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <img src="{% static 'images/church.png' %}" class="d-block w-100 object-fit-cover" style="max-height: 75vh;" alt="Church">
+          <div class="dim-overlay position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
+  
+          <div class="position-absolute top-50 start-50 translate-middle text-white px-4 text-center w-100 d-flex flex-column align-items-center justify-content-center" style="z-index: 2;">
+            <h1 class="fw-bold display-4 text-shadow fade-in-left" style="font-size: 5rem; color:rgb(255, 255, 255);">Campus e-Services</h1>
+          
+  
+            <!-- Animated Cards -->
+            <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
+  
+              <!-- Card 1: Request -->
+              <div class="text-dark shadow rounded-4 fade-in-up" style="width: 50rem; animation-delay: 0.5s;">
+                <div class="card-body text-start p-0">
+                  <div style="background-color:rgb(24, 58, 83, 0.9); padding: 1rem;" class="d-flex align-items-center gap-2">
+                    <i class="bi bi-file-earmark-medical text-white fs-3"></i>
+                    <div>
+                      <h1 class="m-0 text-white fs-2">Request</h1>
+                    </div>
+                    <div class="text-start" style="margin-left:15rem;">
+                      <p class="fs-5 text-white mb-0">Request Credentials.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+              <!-- Card 2: Clearance -->
+              <div class="text-dark shadow rounded-4 fade-in-up" style="width: 50rem; animation-delay: 0.7s;">
+                <div class="card-body text-start p-0">
+                  <div style="background-color:rgb(24, 58, 83, 0.9); padding: 1rem;" class="d-flex align-items-center gap-2">
+                    <i class="bi bi-file-earmark-check text-white fs-3"></i>
+                    <div>
+                      <h1 class="m-0 text-white fs-2">Clearance</h1>
+                    </div>
+                    <div class="text-start" style="margin-left:13rem;">
+                      <p class="fs-5 text-white mb-0">Apply for clearance.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- Card 3: Graduation -->
+              <div class="text-dark shadow rounded-4 fade-in-up" style="width: 50rem; animation-delay: 0.7s;">
+                <div class="card-body text-start p-0">
+                  <div style="background-color:rgb(24, 58, 83, 0.9); padding: 1rem;" class="d-flex align-items-center gap-2">
+                    <i class="bi bi-mortarboard text-white fs-3"></i>
+                    <div>
+                      <h1 class="m-0 text-white fs-2">Graduation</h1>
+                    </div>
+                    <div class="text-start" style="margin-left:12rem;">
+                      <p class="fs-5 text-white mb-0">Apply for graduation.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+  
+        <!-- Slide 3: About us -->
+        <div class="carousel-item">
+          <img src="{% static 'images/room.png' %}" class="d-block w-100 object-fit-cover" style="max-height: 75vh;" alt="Room">
+  
+          <!-- Dim overlay -->
+          <div class="dim-overlay position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
+  
+          <!-- Content -->
+          <div class="position-absolute top-50 start-10 text-white px-5 fade-in-left" style="z-index: 2;">
+            <h1 class="fw-bold display-4 display-md-2 display-lg-1 text-shadow" style="font-size:5rem;">About us</h1>
+            <h2 class="fs-5 fs-md-4 fs-lg-3 text-shadow">PTS College & Advanced Studies</h2>
+            <button 
+            class="btn btn-outline-light bg-transparent border-1 text-white mt-3"
+            onclick="window.location.href='https://ptscas.edu.ph'">
+            Visit site
+          </div>
+        </div>
+  
+      </div>
+  
+      <!-- Carousel Indicators -->
+      <div class="carousel-indicators custom-indicators">
+        <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="0" class="active rounded-circle mx-1" aria-current="true" aria-label="Slide 1" style="width: 12px; height: 12px;"></button>
+        <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="1" class="rounded-circle mx-1" aria-label="Slide 2" style="width: 12px; height: 12px;"></button>
+        <button type="button" data-bs-target="#carouselExampleFade" data-bs-slide-to="2" class="rounded-circle mx-1" aria-label="Slide 3" style="width: 12px; height: 12px;"></button>
+      </div>
+    </div>
+  </section>
+  
+
+
+    <!-- SERVICES SECTION -->
+<section id="services" class="bsb-service-7 py-5 py-xl-8" style="background-color: #F1F5F9;">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-12 col-md-10 col-lg-8 col-xl-7"
+      data-aos="fade" data-aos-duration="1000">
+        <h1 class="mb-2 text-center text-uppercase"
+        style="color: rgba(15, 43, 63, 1);"
+        >Services</h1>
+        <h3 class=" mb-5 mb-xl-9 text-center">The Office of the Registrar of PTS College and Advanced Studies offers the following:</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="container"
+  data-aos="fade-up" data-aos-duration="1000">
+    <div class="row">
+      <div class="col-12">
+        <div class="container-fluid bg-light border shadow">
+          <div class="row">
+            <div class="col-12 col-md-4 p-0">
+              <div class="card border-0 bg-transparent">
+                <div class="card-body text-center p-5">
+                  <i class="bi bi-file-earmark-medical text-black fs-1"></i>
+                  
+                  <h4 class="fw-bold text-uppercase mb-4"
+                  style="color:rgb(69, 57, 49);" 
+                  >Request</h4>
+                  <p class="mb-4 text-secondary fs-6">Easily request academic credentials such as transcripts, certifications, and TOR online.</p>
+                
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 p-0 border-top border-bottom border-start border-end">
+              <div class="card border-0 bg-transparent">
+                <div class="card-body text-center p-5">
+                  <i class="bi bi-file-earmark-check text-black fs-1"></i>
+                  <h4 class="fw-bold text-uppercase mb-4"
+                  style="color:rgb(69, 57, 49);" 
+                  >Clearance</h4>
+                  <p class="mb-4 text-secondary fs-6">Apply for your school clearance online without the need to visit every department manually.</p>
+                
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 p-0">
+              <div class="card border-0 bg-transparent">
+                <div class="card-body text-center p-5">
+                  <i class="bi bi-mortarboard text-black fs-1"></i>
+                  <h4 class="fw-bold text-uppercase mb-4"
+                  style="color:rgb(69, 57, 49);" 
+                  >Graduation</h4>
+                  <p class="mb-4 text-secondary fs-6">Submit your graduation application online and stay updated on your graduation status.</p>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+    <!-- HOW TO SECTION -->
+    <section
+  id="howto"
+  class="d-flex align-items-center justify-content-center"
+  style="min-height: 90vh;
+         background: linear-gradient(90deg, rgba(24, 58, 83, 1) 47%, rgb(69, 57, 49) 91%);
+        "
+>
+  <div class="container text-center" data-aos="fade-up" data-aos-duration="1000">
+    <h1 class="display-4 fw-bold text-white mb-4" style="letter-spacing: 2px;">Guidelines:</h1>
+
+    <div class="card mx-auto shadow-lg rounded-4"
+         style="max-width: 720px; background-color: #ffffff;">
+      <div class="card-body p-4 text-start text-dark">
+        <h3 class="card-title mb-4 fw-semibold">How to Request Credentials</h3>
+        <ol class="fs-5 lh-lg mb-0">
+          <li>Sign up as either a <strong>student</strong> or <strong>alumni</strong>.</li>
+          <li>Check your email for the <strong>verification code</strong> sent by the system.</li>
+          <li>Log in and click <strong>“Request”</strong> on the sidebar.</li>
+          <li>Fill out the <strong>request form</strong> and click <strong>Submit</strong>.</li>
+          <li>Wait for a <strong>confirmation email</strong> with your appointment details to claim your requested document.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+    <!-- MAIL SECTION -->
+    <section
+      id="mail"
+      class="bg-light d-flex align-items-center scroll-section"
+      style="min-height: 50vh"
+    >
+      <div class="container text-center"
+      data-aos="fade-in" data-aos-duration="1000">   
+      <h1>Mail us on:</h1>
+        <p>info@ptscas.edu.ph</p>
+        <p>registrar@ptscas.edu.ph</p>
+      </div>
+    </section>
+
+    <!-- FACEBOOK SECTION -->
+    <section
+    id="facebook"
+    class="text-dark d-flex align-items-center scroll-section"
+    style="min-height: 50vh;
+     background: linear-gradient(90deg, rgba(24, 58, 83, 1) 47%, rgba(49, 93, 125, 1) 91%);"
+  >
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Left Column: Image with fade-in -->
+        <div class="col-md-6 text-center" data-aos="fade-right" data-aos-duration="1000">
+          <img src="{% static 'images/facebook.png' %}" alt="Facebook Logo"
+            style="width: 200px; height: 200px;" class="img-fluid" />
+        </div>
+  
+        <!-- Right Column: Text -->
+        <div class="col-md-6"
+        >
+        <div class="text-center">
+          <h1 class="fw-bold text-white"
+              data-aos="fade-in" data-aos-duration="1000">
+            FACEBOOK
+          </h1>
+          <h3 class="fw-light text-white"
+          data-aos="fade-in" data-aos-duration="1000">
+          PTS College & Advanced Studies - Official 
+      </h3>
+          <button 
+            class="btn btn-outline-light bg-transparent border-1 text-white mt-3"
+            onclick="window.location.href='https://web.facebook.com/ptscas'">
+            Visit Facebook
+          </button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+    <!-- ABOUT US SECTION -->
+<section 
+id="about-us"
+class="scroll-section position-relative"
+style="min-height: 80vh;"
+>
+<!-- Background Blurred Image -->
+<img 
+  src="{% static 'images/registrar.png' %}" 
+  class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+  style="filter: blur(2px); z-index: 0; object-fit: cover;" 
+  alt="Room"
+>
+  <!-- Dim overlay -->
+  <div class="dim-overlay position-absolute top-0 start-0 w-100 h-100" 
+  style="background-color: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
+
+<!-- Foreground Content Centered -->
+<div 
+  class="position-absolute top-50 start-50 translate-middle w-100 px-3"
+  style="z-index: 1;"
+>
+  <div class="container text-center text-white">
+    <div class="row justify-content-center align-items-center">
+      
+      <!-- Logo -->
+      <div class="col-12 mb-4">
+        <img 
+          src="{% static 'images/logo.png' %}" 
+          alt="PTS Logo" 
+          style="max-width: 200px; height: auto;" 
+          class="img-fluid"
+          data-aos="fade-right" 
+          data-aos-duration="1000"
+        >
+      </div>
+      
+      <!-- About Us Heading -->
+      <div class="col-lg-8">
+        <h1 
+          class="fw-bold"
+          data-aos="fade-in" 
+          data-aos-duration="1000"
+          style="color: rgb(223, 242, 255);"
+        >
+          About Us
+        </h1>
+        <p class="fs-5 mt-3" style="line-height: 1.6;"
+        data-aos="fade-in" 
+        data-aos-duration="1000">
+          PTS College & Advanced Studies is committed to delivering high-quality education rooted in academic excellence and Christian values. We aim to empower students with the knowledge and skills needed to serve their communities and the world.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>
+
+  
+    <!-- OUR TEAM SECTION -->
+  
+    <section id="ourteam" class="team-wrapper">
+
+
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12 text-center text-light">
+                  <div class="section-title">
+                      <h3>Our Team</h3>
+                      
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <!-- Our Team item start -->
+              <div class="col-md-3 col-sm-6">
+                  <div class="team-item">
+                      <div class="item-image">
+                          <img src={% static 'images/our-team.png' %} alt="" width="100%">
+                      </div>
+                      <div class="item-meta">
+                          <h3 class="item-title">Juliette E. Baccay</h3>
+                          <h6 class="item-position">Web Developer</h6>
+                      </div>
+                  </div>
+              </div>
+              <!-- Our Team item end -->
+              <!-- Our Team item start -->
+              <div class="col-md-3 col-sm-6">
+                  <div class="team-item">
+                      <div class="item-image">
+                          <img src={% static 'images/our-team.png' %} alt="" width="100%">
+                      </div>
+                      <div class="item-meta">
+                          <h3 class="item-title">Mary Moreene V. Valdez</h3>
+                          <h6 class="item-position">Web Developer</h6>
+                      </div>
+                  </div>
+              </div>
+              <!-- Our Team item end -->
+              <!-- Our Team item start -->
+              <div class="col-md-3 col-sm-6">
+                  <div class="team-item">
+                      <div class="item-image">
+                          <img src={% static 'images/our-team.png' %} alt="" width="100%">
+                      </div>
+                      <div class="item-meta">
+                          <h3 class="item-title">Alexa R. Dela Cruz</h3>
+                          <h6 class="item-position">Web Developer</h6>
+                      </div>
+                  </div>
+              </div>
+              <!-- Our Team item end -->
+              <!-- Our Team item start -->
+              <div class="col-md-3 col-sm-6">
+                  <div class="team-item">
+                      <div class="item-image">
+                          <img src={% static 'images/our-team.png' %} alt="" width="100%">
+                      </div>
+                      <div class="item-meta">
+                          <h3 class="item-title"> Reynald Ace M. Pilpil</h3>
+                          <h6 class="item-position">Web Developer</h6>
+                      </div>
+                  </div>
+              </div>
+              <!-- Our Team item end -->
+          </div>
+      </div>
+  </section>
+    </section>
+
+   
+    <footer class="bg-dark text-white text-center text-lg-start">
+      <div class="text-center fs-6 py-2" style="background-color:black;">
+          © 2025 PTS Request Credential Form System. All rights reserved.
+      </footer>
+
+      <!-- Back to Top Button -->
+<button id="backToTopBtn" 
+class="btn btn-dark position-fixed rounded-circle"
+style="bottom: 40px; right: 30px; z-index: 9999; display: none; width: 50px; height: 50px;">
+<i class="bi bi-arrow-up"></i>
+</button>
+
+<!-- ✅ External Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+<!-- ✅ AOS Initialization -->
+<script>
+  AOS.init();
+</script>
+
+<!-- ✅ Toggle "Other" Input Field -->
+<script>
+  function toggleInput() {
+    const checkbox = document.getElementById('inlineCheckbox6');
+    const input = document.getElementById('otherInput');
+    input.disabled = !checkbox.checked;
+  }
+</script>
+
+<!-- ✅ Sign-up Role Switcher Logic -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const loginBox = document.querySelector(".login-box");
+    const allSignupForms = document.querySelectorAll(".user-form");
+
+    document.querySelectorAll(".users-btn").forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const role = this.getAttribute("data-role");
+
+        // Hide modal
+        bootstrap.Modal.getInstance(
+          document.getElementById("testModal")
+        ).hide();
+
+        // Hide login form
+        loginBox.classList.remove("active");
+
+        // Hide all signup forms
+        allSignupForms.forEach((form) => form.classList.add("d-none"));
+
+        // Show the selected one
+        const selectedForm = document.getElementById(`signup-${role}`);
+        if (selectedForm) {
+          selectedForm.classList.remove("d-none");
+          selectedForm.classList.add("active");
+        }
+      });
+    });
+
+    // Go back to login
+    document.querySelectorAll(".back-to-login").forEach((btn) => {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        loginBox.classList.add("active");
+        allSignupForms.forEach((form) => {
+          form.classList.add("d-none");
+          form.classList.remove("active");
+        });
+      });
+    });
+  });
+</script>
+
+<!-- ✅ Back to Top Button Logic -->
+<script>
+  const backToTopBtn = document.getElementById("backToTopBtn");
+
+  window.addEventListener("scroll", () => {
+    backToTopBtn.style.display = window.scrollY > 200 ? "block" : "none";
+  });
+
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+
+</body>
+</html>

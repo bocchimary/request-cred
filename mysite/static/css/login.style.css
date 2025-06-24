@@ -1,0 +1,352 @@
+/* ===== LOGIN PAGE SPECIFIC STYLES ===== */
+
+/* Background and page title */
+
+main {
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+                      url("{% static 'images/ptsbg.png' %}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  
+body {
+ 
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+
+.page-title {
+    background: rgba(24, 58, 83, 0.8);
+    padding: 3rem;
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.page-title h1 {
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.page-title h2 {
+    color: #e0e0e0;
+    font-weight: 400;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-in-left {
+    opacity: 0;
+    margin-left: 20px;
+    position: relative;
+    z-index: 2;
+    animation: fadeInLeft 1s ease-out forwards;
+}
+
+/* ===== AUTHENTICATION BOXES ===== */
+.auth-box {
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.login-box {
+    margin-top: -4rem;
+    width: 350px;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: none;
+}
+
+.login-box.active {
+    display: block;
+}
+
+.login-title {
+    margin-bottom: 1.5rem;
+    color: #183A53;
+    font-weight: 600;
+}
+
+.login-btn {
+    background-color: #183A53 !important;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.signup-box {
+    margin: 1rem;
+    border-radius: 1rem;
+    max-width: 650px;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 0.75rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: none;
+}
+
+.signup-box.active {
+    display: block;
+}
+
+.signup-box-alumni {
+    margin: 1rem;
+    border-radius: 1rem;
+    max-width: 500px;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 0.75rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.signup-title {
+    margin-bottom: 1.5rem;
+    color: #183A53;
+    font-weight: 600;
+}
+
+.signup-btn {
+    background-color: #2E5978 !important;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+/* ===== SIGNUP SECTION ===== */
+.signup {
+    margin-top: -70px;
+    margin-left: 50px;
+    text-align: center;
+    max-width: 1000px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.section-up {
+    margin-top: -50px;
+}
+
+.section-signup {
+    margin-top: -10px;
+}
+
+/* ===== FORM STYLING ===== */
+.form-control, .form-select {
+    border: 2px solid #e0e0e0;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #2E5978;
+    box-shadow: 0 0 0 0.2rem rgba(46, 89, 120, 0.15);
+    background-color: #ffffff;
+}
+
+.form-label {
+    color: #183A53;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (min-width: 768px) {
+    .auth-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* ===== FORM VALIDATION FEEDBACK ===== */
+.is-invalid {
+    border-color: #c3303f !important;
+    background-image: none !important;
+    background-repeat: no-repeat !important;
+    background-position: right calc(0.375em + 0.1875rem) center !important;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem) !important;
+}
+
+.is-valid {
+    border-color: #188c56 !important;
+    background-image: none !important;
+    background-repeat: no-repeat !important;
+    background-position: right calc(0.375em + 0.1875rem) center !important;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem) !important;
+}
+
+/* Override Bootstrap's validation icons for form controls */
+.form-control.is-valid,
+.form-select.is-valid {
+    background-image: none !important;
+    padding-right: 0.5rem !important;
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+    background-image: none !important;
+    padding-right: 0.5rem !important;
+}
+
+.invalid-feedback {
+    display: none;
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Show invalid feedback when input is invalid */
+input.is-invalid ~ .invalid-feedback,
+select.is-invalid ~ .invalid-feedback,
+textarea.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* Focus states */
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #2E5978;
+    box-shadow: 0 0 0 0.2rem rgba(46, 89, 120, 0.15);
+}
+
+/* ===== BUTTON HOVER STATES ===== */
+.login-btn:hover, .signup-btn:hover {
+    background-color: #14507a !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(24, 58, 83, 0.3);
+    transform: translateY(-1px);
+}
+
+.login-btn:active, .signup-btn:active {
+    transform: translateY(0);
+}
+
+/* ===== FILE INPUT ===== */
+input[type="file"] {
+    border: 2px solid #e0e0e0;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+}
+
+input[type="file"]:focus {
+    border-color: #2E5978;
+    box-shadow: 0 0 0 0.2rem rgba(46, 89, 120, 0.15);
+}
+
+.form-text {
+    color: #6c757d;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* ===== MODAL STYLING ===== */
+.modal-content {
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #f8f9fa;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.modal-title {
+    color: #183A53;
+    font-weight: 600;
+}
+
+.users-btn {
+    background-color: #183A53 !important;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.users-btn:hover {
+    background-color: #14507a !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(24, 58, 83, 0.3);
+}
+
+/* ===== FOOTER STYLING ===== */
+footer {
+    background-color: #183A53 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+.signup-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.signup-box::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.signup-box::-webkit-scrollbar-thumb {
+    background: #2E5978;
+    border-radius: 4px;
+}
+
+.signup-box::-webkit-scrollbar-thumb:hover {
+    background: #183A53;
+}
+
+/* ===== LOADING STATES ===== */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    .fade-in-left {
+        animation: none;
+        opacity: 1;
+    }
+    
+    .login-btn:hover, .signup-btn:hover, .users-btn:hover {
+        transform: none;
+    }
+}

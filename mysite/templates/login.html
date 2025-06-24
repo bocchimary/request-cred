@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - PTS College and Advanced Studies</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    
+    <link rel="stylesheet" href="{% static 'css/login.style.css' %}" />
+  </head>
+
+ 
+  <body>
+
+   <!-- Main Section -->
+<main class="container-fluid min-vh-100"
+style="background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('{% static 'images/ptsbg.png' %}');
+       background-size: cover;
+       background-position: center;
+       background-repeat: no-repeat;
+       background-attachment: fixed;">
+
+      <div class="row g-0 d-flex justify-content-center align-items-center">
+    <!-- Left Column - Title Section -->
+    <div class="col-12 col-md-6 d-flex align-items-center justify-content-center text-center p-4"
+         style="min-height: 100vh">
+      <div class="px-3 text-center page-title fade-in-left">
+        <h1 class="fs-1">Office of the Registrar</h1>
+        <h2 class="h5">PTS College and Advanced Studies</h2>
+      </div>
+    </div>
+
+        <!-- Right Column - Forms Section -->
+    <div class="col-12 col-md-6 d-flex justify-content-center align-items-center p-4"
+    style="min-height: 100vh;">
+          <div class="forms-container">
+            <!-- LOGIN FORM -->
+            <div class="login-box active" id="login-form">
+              <h2 class="text-center login-title mb-2">Login</h2>
+              <form method="POST" action="/dashboard/" id="loginForm" novalidate>
+                {% csrf_token %}
+                <div class="form-group mb-4">
+                  <div class="d-flex justify-content-center">
+                    <input
+                      type="email"
+                      name="login-email"
+                      id="login-email"
+                      class="form-control w-75"
+                      required
+                      placeholder="Email"
+                      aria-label="Email"
+                      autocomplete="email"
+                    />
+                  </div>
+                  <div class="invalid-feedback w-75 mx-auto">Please enter a valid email address.</div>
+                </div>
+                
+                <div class="form-group mb-4">
+                  <div class="d-flex justify-content-center">
+                    <input
+                      type="password"
+                      name="login-password"
+                      id="login-password"
+                      class="form-control w-75"
+                      required
+                      placeholder="Password"
+                      aria-label="Password"
+                      minlength="8"
+                      autocomplete="current-password"
+                    />
+                  </div>
+                  <div class="invalid-feedback w-75 mx-auto">Password is required.</div>
+                </div>
+                
+                <div class="d-flex justify-content-center mb-4">
+                  <button type="submit" class="btn login-btn w-50 text-white">
+                    Login
+                  </button>
+                </div>
+                
+                <div class="text-center">
+                  <hr class="border border-dark border-1 opacity-75 my-4" />
+                  <h6>Don't have an account?</h6>
+                  <button
+                    class="btn w-50 text-white signup-btn"
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#userTypeModal"
+                  >
+                    Signup
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- STUDENT SIGNUP FORM -->
+            <div class="signup-box user-form d-none" id="signup-student">
+              <h2 class="text-center signup-title mb-3">Student Sign up</h2>
+              <form method="POST" action="/otp/" enctype="multipart/form-data" id="studentSignupForm" novalidate>
+                {% csrf_token %}
+                
+                <!-- Name Fields -->
+                <div class="form-group mb-2">
+                  <label class="form-label fs-6">Name: *</label>
+                  <div class="d-flex gap-1">
+                    <input 
+                      type="text" 
+                      name="signup-student-first-name" 
+                      class="form-control" 
+                      id="signup-student-first-name" 
+                      required 
+                      placeholder="First Name" 
+                      pattern="[A-Za-z\s]+" 
+                      maxlength="50" 
+                      aria-label="First Name" 
+                    />
+                    <input 
+                      type="text" 
+                      name="signup-student-middle-name" 
+                      class="form-control" 
+                      id="signup-student-middle-name" 
+                      required 
+                      placeholder="Middle Name" 
+                      pattern="[A-Za-z\s]+" 
+                      maxlength="50" 
+                      aria-label="Middle Name" 
+                    />
+                    <input 
+                      type="text" 
+                      name="signup-student-last-name" 
+                      class="form-control" 
+                      id="signup-student-last-name" 
+                      required 
+                      placeholder="Last Name" 
+                      pattern="[A-Za-z\s]+" 
+                      maxlength="50" 
+                      aria-label="Last Name" 
+                    />
+                    <input 
+                      type="text" 
+                      name="signup-student-suffix" 
+                      class="form-control w-25" 
+                      id="signup-student-suffix" 
+                      placeholder="Suffix" 
+                      maxlength="10" 
+                      aria-label="Suffix" 
+                    />
+                  </div>
+                </div>
+
+                <!-- Address Field -->
+                <div class="form-group mb-2">
+                  <label for="signup-student-address" class="form-label fs-6">Address *</label>
+                  <input 
+                    type="text" 
+                    name="signup-student-address" 
+                    class="form-control" 
+                    id="signup-student-address" 
+                    required 
+                    placeholder="Address" 
+                    maxlength="200" 
+                    aria-label="Address" 
+                  />
+                </div>
+
+                <!-- Gender and Birthdate -->
+                <div class="row mb-2">
+                  <div class="col-md-6">
+                    <label for="signup-student-gender" class="form-label fs-6">Gender *</label>
+                    <select name="signup-student-gender" id="signup-student-gender" class="form-select" required aria-label="Gender">
+                      <option selected disabled value="">Select Gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="signup-student-birthdate" class="form-label fs-6">Date of Birth *</label>
+                    <input 
+                      type="date" 
+                      id="signup-student-birthdate" 
+                      name="signup-student-birthdate" 
+                      class="form-control" 
+                      required 
+                      max="{{ max_date }}" 
+                      aria-label="Date of Birth" 
+                    />
+                  </div>
+                </div>
+
+                <!-- ID Number and Course -->
+                <div class="form-group mb-2">
+                  <label for="signup-student-id" class="form-label fs-6">ID Number: *</label>
+                  <input 
+                    type="text" 
+                    name="signup-student-id" 
+                    class="form-control" 
+                    id="signup-student-id" 
+                    required 
+                    placeholder="Type your ID number" 
+                    pattern="[A-Za-z0-9-]+" 
+                    maxlength="20" 
+                    aria-label="ID Number" 
+                  />
+                </div>
+
+                <div class="form-group mb-2">
+                  <label for="signup-student-course" class="form-label fs-6">Course: *</label>
+                  <select name="signup-student-course" id="signup-student-course" class="form-select" required aria-label="Course">
+                    <option selected disabled value="">Select Course</option>
+                    <option value="ABTh">Bachelor of Arts in Theology</option>
+                    <option value="BTh">Bachelor of Theology</option>
+                    <option value="BSED-VE">Bachelor of Secondary Education Major in Values Education</option>
+                    <option value="BEED">Bachelor of Elementary Education</option>
+                    <option value="MDivBS">Master of Divinity - Biblical Studies</option>
+                    <option value="MDivPS">Master of Divinity - Pastoral Studies</option>
+                    <option value="MABC">Master of Arts in Biblical Counseling</option>
+                    <option value="MABE">Master of Arts in Biblical Exposition</option>
+                    <option value="MAM">Master of Arts in Ministry</option>
+                    <option value="MABS">Master of Arts in Biblical Studies</option>
+                    <option value="MAICS">Master of Arts in Intercultural Studies</option>
+                    <option value="MACE">Master of Arts in Christian Education</option>
+                  </select>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="form-group mb-2">
+                  <label for="signup-student-contact" class="form-label fs-6">Contact Number: *</label>
+                  <input 
+                    type="tel" 
+                    class="form-control" 
+                    id="signup-student-contact" 
+                    name="signup-student-contact" 
+                    placeholder="09XXXXXXXXX" 
+                    required 
+                    pattern="09[0-9]{9}" 
+                    maxlength="11" 
+                    aria-label="Contact Number" 
+                  />
+                  <div class="invalid-feedback">Please enter a valid 11-digit mobile number starting with 09</div>
+                </div>
+
+                <div class="form-group mb-2">
+                  <label for="signup-student-email" class="form-label fs-6">Email: *</label>
+                  <input 
+                    type="email" 
+                    name="signup-student-email" 
+                    class="form-control" 
+                    id="signup-student-email" 
+                    required 
+                    placeholder="Email" 
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                    aria-label="Email" 
+                  />
+                  <div class="invalid-feedback">Please enter a valid email address</div>
+                </div>
+
+                <!-- Password Fields -->
+                <div class="form-group mb-2">
+                  <label for="signup-student-password" class="form-label fs-6">Password: *</label>
+                  <input 
+                    type="password" 
+                    name="signup-student-password" 
+                    id="signup-student-password" 
+                    class="form-control" 
+                    placeholder="Enter your password" 
+                    required 
+                    minlength="8" 
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" 
+                    aria-label="Password" 
+                  />
+                  <div class="invalid-feedback">Password must be at least 8 characters, include uppercase, lowercase, number, and special character.</div>
+                </div>
+
+                <div class="form-group mb-2">
+                  <label for="signup-student-confirm-password" class="form-label fs-6">Confirm Password: *</label>
+                  <input 
+                    type="password" 
+                    name="signup-student-confirm-password" 
+                    id="signup-student-confirm-password" 
+                    class="form-control" 
+                    placeholder="Re-type your password" 
+                    required 
+                    aria-label="Confirm Password" 
+                  />
+                  <div class="invalid-feedback" id="student-confirm-password-error">Passwords must match.</div>
+                </div>
+
+                <!-- Profile Picture -->
+                <div class="form-group mb-2">
+                  <label for="signup-student-profilepic" class="form-label fs-6">Profile Picture:</label>
+                  <input 
+                    type="file" 
+                    class="form-control w-50" 
+                    id="signup-student-profilepic" 
+                    name="signup-student-profilepic" 
+                    accept="image/*" 
+                    aria-label="Profile Picture" 
+                  />
+                  <div class="form-text">Max 5MB. JPG, PNG, GIF only.</div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-end mt-2">
+                  <button type="submit" class="btn btn-secondary w-25 text-white signup-btn">Sign up</button>
+                </div>
+
+                <!-- Back to Login -->
+                <div class="text-center">
+                  <hr class="border border-dark border-1 opacity-75 my-3" />
+                  <h6>Already have an account?</h6>
+                  <button class="btn btn-secondary w-25 back-to-login login-btn" type="button">Login</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- ALUMNI SIGNUP FORM -->
+            <div class="signup-box user-form d-none" id="signup-alumni">
+              <h2 class="text-center signup-title mb-3">Alumni Sign up</h2>
+              <form method="POST" action="/otp/" enctype="multipart/form-data" id="alumniSignupForm" novalidate>
+                {% csrf_token %}
+                
+                <!-- Name Fields -->
+                <div class="form-group mb-2">
+                  <label class="form-label fs-6">Name: *</label>
+                  <div class="d-flex gap-1">
+                    <input 
+                      type="text" 
+                      name="signup-alumni-first-name" 
+                      class="form-control" 
+                      id="signup-alumni-first-name" 
+                      required 
+                      placeholder="First Name" 
+                      pattern="[A-Za-z\s]+" 
+                      maxlength="50" 
+                      aria-label="First Name" 
+                    />
+                    <input 
+                      type="text" 
+                      name="signup-alumni-middle-name" 
+                      class="form-control" 
+                      id="signup-alumni-middle-name" 
+                      required 
+                      placeholder="Middle Name" 
+                      pattern="[A-Za-z\s]+" 
+                      maxlength="50" 
+                      aria-label="Middle Name" 
+                    />
+                    <input 
+                      type="text" 
+                      name="signup-alumni-last-name" 
+                      class="form-control" 
+                      id="signup-alumni-last-name" 
+                      required 
+                      placeholder="Last Name" 
+                      pattern="[A-Za-z\s]+" 
+                      maxlength="50" 
+                      aria-label="Last Name" 
+                    />
+                    <input 
+                      type="text" 
+                      name="signup-alumni-suffix" 
+                      class="form-control w-25" 
+                      id="signup-alumni-suffix" 
+                      placeholder="Suffix" 
+                      maxlength="10" 
+                      aria-label="Suffix" 
+                    />
+                  </div>
+                </div>
+
+                <!-- Address Field -->
+                <div class="form-group mb-2">
+                  <label for="signup-alumni-address" class="form-label fs-6">Address *</label>
+                  <input 
+                    type="text" 
+                    name="signup-alumni-address" 
+                    class="form-control" 
+                    id="signup-alumni-address" 
+                    required 
+                    placeholder="Address" 
+                    maxlength="200" 
+                    aria-label="Address" 
+                  />
+                </div>
+
+                <!-- Gender and Birthdate -->
+                <div class="row mb-2">
+                  <div class="col-md-6">
+                    <label for="signup-alumni-gender" class="form-label fs-6">Gender *</label>
+                    <select name="signup-alumni-gender" id="signup-alumni-gender" class="form-select" required aria-label="Gender">
+                      <option selected disabled value="">Select Gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="signup-alumni-birthdate" class="form-label fs-6">Date of Birth *</label>
+                    <input 
+                      type="date" 
+                      id="signup-alumni-birthdate" 
+                      name="signup-alumni-birthdate" 
+                      class="form-control" 
+                      required 
+                      max="{{ max_date }}" 
+                      aria-label="Date of Birth" 
+                    />
+                  </div>
+                </div>
+
+                <!-- ID Number, Year Graduated, and Course -->
+                <div class="form-group mb-2">
+                  <label for="signup-alumni-id" class="form-label fs-6">ID Number: *</label>
+                  <input 
+                    type="text" 
+                    name="signup-alumni-id" 
+                    class="form-control" 
+                    id="signup-alumni-id" 
+                    required 
+                    placeholder="Type your ID number" 
+                    pattern="[A-Za-z0-9-]+" 
+                    maxlength="20" 
+                    aria-label="ID Number" 
+                  />
+                </div>
+
+                <div class="form-group mb-2">
+                  <label for="signup-alumni-year-graduated" class="form-label fs-6">Year Graduated: *</label>
+                  <input 
+                    type="text" 
+                    name="signup-alumni-year-graduated" 
+                    class="form-control" 
+                    id="signup-alumni-year-graduated" 
+                    required 
+                    placeholder="Year Graduated" 
+                    pattern="[0-9]{4}" 
+                    maxlength="4" 
+                    aria-label="Year Graduated" 
+                  />
+                  <div class="invalid-feedback">Please enter a valid year (e.g., 2020).</div>
+                </div>
+
+                <div class="form-group mb-2">
+                  <label for="signup-alumni-course" class="form-label fs-6">Course Graduated: *</label>
+                  <select name="signup-alumni-course" id="signup-alumni-course" class="form-select" required aria-label="Course Graduated">
+                    <option selected disabled value="">Select Course</option>
+                    <option value="ABTh">Bachelor of Arts in Theology</option>
+                    <option value="BTh">Bachelor of Theology</option>
+                    <option value="BSED-VE">Bachelor of Secondary Education Major in Values Education</option>
+                    <option value="BEED">Bachelor of Elementary Education</option>
+                    <option value="MDivBS">Master of Divinity - Biblical Studies</option>
+                    <option value="MDivPS">Master of Divinity - Pastoral Studies</option>
+                    <option value="MABC">Master of Arts in Biblical Counseling</option>
+                    <option value="MABE">Master of Arts in Biblical Exposition</option>
+                    <option value="MAM">Master of Arts in Ministry</option>
+                    <option value="MABS">Master of Arts in Biblical Studies</option>
+                    <option value="MAICS">Master of Arts in Intercultural Studies</option>
+                    <option value="MACE">Master of Arts in Christian Education</option>
+                  </select>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="form-group mb-2">
+                  <label for="signup-alumni-contact" class="form-label fs-6">Contact Number: *</label>
+                  <input 
+                    type="tel" 
+                    class="form-control" 
+                    id="signup-alumni-contact" 
+                    name="signup-alumni-contact" 
+                    placeholder="09XXXXXXXXX" 
+                    required 
+                    pattern="09[0-9]{9}" 
+                    maxlength="11" 
+                    aria-label="Contact Number" 
+                  />
+                  <div class="invalid-feedback">Please enter a valid 11-digit mobile number starting with 09</div>
+                </div>
+
+                <div class="form-group mb-2">
+                  <label for="signup-alumni-email" class="form-label fs-6">Email: *</label>
+                  <input 
+                    type="email" 
+                    name="signup-alumni-email" 
+                    class="form-control" 
+                    id="signup-alumni-email" 
+                    required 
+                    placeholder="Email" 
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                    aria-label="Email" 
+                  />
+                  <div class="invalid-feedback">Please enter a valid email address</div>
+                </div>
+
+                <!-- Password Fields -->
+                <div class="form-group mb-2">
+                  <label for="signup-alumni-password" class="form-label fs-6">Password: *</label>
+                  <input 
+                    type="password" 
+                    name="signup-alumni-password" 
+                    id="signup-alumni-password" 
+                    class="form-control" 
+                    placeholder="Enter your password" 
+                    required 
+                    minlength="8" 
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" 
+                    aria-label="Password" 
+                  />
+                  <div class="invalid-feedback">Password must be at least 8 characters, include uppercase, lowercase, number, and special character.</div>
+                </div>
+
+                <div class="form-group mb-2">
+                  <label for="signup-alumni-confirm-password" class="form-label fs-6">Confirm Password: *</label>
+                  <input 
+                    type="password" 
+                    name="signup-alumni-confirm-password" 
+                    id="signup-alumni-confirm-password" 
+                    class="form-control" 
+                    placeholder="Re-type your password" 
+                    required 
+                    aria-label="Confirm Password" 
+                  />
+                  <div class="invalid-feedback" id="alumni-confirm-password-error">Passwords must match.</div>
+                </div>
+
+                <!-- Profile Picture -->
+                <div class="form-group mb-2">
+                  <label for="signup-alumni-profilepic" class="form-label fs-6">Profile Picture:</label>
+                  <input 
+                    type="file" 
+                    class="form-control w-50" 
+                    id="signup-alumni-profilepic" 
+                    name="signup-alumni-profilepic" 
+                    accept="image/*" 
+                    aria-label="Profile Picture" 
+                  />
+                  <div class="form-text">Max 5MB. JPG, PNG, GIF only.</div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-end mt-2">
+                  <button type="submit" class="btn btn-secondary w-25 text-white signup-btn">Sign up</button>
+                </div>
+
+                <!-- Back to Login -->
+                <div class="text-center">
+                  <hr class="border border-dark border-1 opacity-75 my-3" />
+                  <h6>Already have an account?</h6>
+                  <button class="btn btn-secondary w-25 back-to-login login-btn" type="button">Login</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- User Type Selection Modal -->
+    <div class="modal fade" id="userTypeModal" tabindex="-1" aria-labelledby="userTypeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="userTypeModalLabel">Sign up as:</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <button type="button" class="btn btn-primary w-50 mb-2 users-btn" data-role="student">
+              Student
+            </button>
+            <button type="button" class="btn btn-primary w-50 mb-2 users-btn" data-role="alumni">
+              Alumni
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center text-lg-start">
+      <div class="text-center fs-6 py-2" style="background-color:#183A53;">
+        © 2025 PTS Request Credential Form System. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Form elements
+        const loginBox = document.querySelector(".login-box");
+        const allSignupForms = document.querySelectorAll(".user-form");
+        const loginForm = document.getElementById("loginForm");
+        const studentSignupForm = document.getElementById("studentSignupForm");
+        const alumniSignupForm = document.getElementById("alumniSignupForm");
+
+        // User type selection
+        document.querySelectorAll(".users-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const role = this.getAttribute("data-role");
+
+            // Hide modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById("userTypeModal"));
+            if (modal) modal.hide();
+
+            // Hide login form
+            loginBox.classList.remove("active");
+
+            // Hide all signup forms
+            allSignupForms.forEach((form) => {
+              form.classList.add("d-none");
+              form.classList.remove("active");
+            });
+
+            // Show the selected form
+            const selectedForm = document.getElementById(`signup-${role}`);
+            if (selectedForm) {
+              selectedForm.classList.remove("d-none");
+              selectedForm.classList.add("active");
+            }
+          });
+        });
+
+        // Back to login functionality
+        document.querySelectorAll(".back-to-login").forEach((btn) => {
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            loginBox.classList.add("active");
+            allSignupForms.forEach((form) => {
+              form.classList.add("d-none");
+              form.classList.remove("active");
+            });
+          });
+        });
+
+        // Form validation
+        function validateForm(form) {
+          let isValid = true;
+          const inputs = form.querySelectorAll('input[required], select[required]');
+          
+          inputs.forEach(input => {
+            if (!input.checkValidity()) {
+              input.classList.add('is-invalid');
+              isValid = false;
+            } else {
+              input.classList.remove('is-invalid');
+              input.classList.add('is-valid');
+            }
+          });
+
+          return isValid;
+        }
+
+        // Password confirmation validation
+        function validatePasswordConfirmation(passwordField, confirmField, errorElement) {
+          if (passwordField.value !== confirmField.value) {
+            confirmField.classList.add('is-invalid');
+            errorElement.style.display = 'block';
+            return false;
+          } else {
+            confirmField.classList.remove('is-invalid');
+            confirmField.classList.add('is-valid');
+            errorElement.style.display = 'none';
+            return true;
+          }
+        }
+
+        // Student form validation
+        if (studentSignupForm) {
+          const studentPassword = document.getElementById('signup-student-password');
+          const studentConfirmPassword = document.getElementById('signup-student-confirm-password');
+          const studentPasswordError = document.getElementById('student-confirm-password-error');
+
+          studentConfirmPassword.addEventListener('input', function() {
+            validatePasswordConfirmation(studentPassword, studentConfirmPassword, studentPasswordError);
+          });
+
+          studentSignupForm.addEventListener('submit', function(e) {
+            if (!validateForm(this)) {
+              e.preventDefault();
+            }
+            if (!validatePasswordConfirmation(studentPassword, studentConfirmPassword, studentPasswordError)) {
+              e.preventDefault();
+            }
+          });
+        }
+
+        // Alumni form validation
+        if (alumniSignupForm) {
+          const alumniPassword = document.getElementById('signup-alumni-password');
+          const alumniConfirmPassword = document.getElementById('signup-alumni-confirm-password');
+          const alumniPasswordError = document.getElementById('alumni-confirm-password-error');
+
+          alumniConfirmPassword.addEventListener('input', function() {
+            validatePasswordConfirmation(alumniPassword, alumniConfirmPassword, alumniPasswordError);
+          });
+
+          alumniSignupForm.addEventListener('submit', function(e) {
+            if (!validateForm(this)) {
+              e.preventDefault();
+            }
+            if (!validatePasswordConfirmation(alumniPassword, alumniConfirmPassword, alumniPasswordError)) {
+              e.preventDefault();
+            }
+          });
+        }
+
+        // Login form validation
+        if (loginForm) {
+          loginForm.addEventListener('submit', function(e) {
+            if (!validateForm(this)) {
+              e.preventDefault();
+            }
+          });
+        }
+
+        // Real-time validation feedback
+        document.querySelectorAll('input, select').forEach(input => {
+          input.addEventListener('blur', function() {
+            if (this.hasAttribute('required')) {
+              if (this.checkValidity()) {
+                this.classList.remove('is-invalid');
+                this.classList.add('is-valid');
+              } else {
+                this.classList.remove('is-valid');
+                this.classList.add('is-invalid');
+              }
+            }
+          });
+        });
+      });
+    </script>
+
+  </body>
+</html> 

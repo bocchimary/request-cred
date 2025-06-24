@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verification</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    
+  <style>
+    body {
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    .otp {
+        
+        width: 400px;
+        height: 300px;
+        background-color:rgba(252, 252, 252, 0.9);
+        padding: 2rem;
+        border-radius: 1rem;
+    }
+    .submit {
+        background-color:#2E5978 !important;
+    }
+    
+    .mtop {
+        margin-top:-50px;
+    }
+    .fsize-1 {
+        font-size: 15px;
+    }
+</style> 
+  </head>
+
+
+
+  <body style="background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('{% static 'images/ptsbg.png' %}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;">
+
+
+   <!-- LOGIN FORM -->
+    <div class="container min-vh-100 d-flex justify-content-center align-items-center mtop">
+   <div class="otp">
+    <h2 class="text-center mb-2">Enter Verification Code</h2>
+    <hr
+                    class="border border-dark border-1 opacity-75"
+                  />
+    <form method="POST" action="/">
+      {% csrf_token %}
+         <!-- OTP INPUT 4 DIGITS-->
+      <div class="row d-flex justify-content-center mt-3 mb-4 ">
+        <input
+          type="text"
+          name="otp"
+          class="form-control w-50" id="code" name="code"
+       pattern="\d{4}" maxlength="4" inputmode="numeric" 
+          placeholder="Type OTP code" required />
+           <!-- OTP RESEND CODE-->
+        <button type="button" class="btn btn-link text-decoration-underline text-black w-30">
+            Resend OTP code
+          </button>
+          <small class="fsize-1 mt-1 text-center text-muted">Please check your email for the One-Time Password 
+            (OTP) that has been sent by the system.</small>
+
+      <div class="text-center">
+        <button
+          class="btn w-50 text-white submit"
+          type="button"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+    
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+</html>

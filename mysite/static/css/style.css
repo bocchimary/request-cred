@@ -1,0 +1,239 @@
+/* ===== RESET & BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    background-color: #183A53;
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, p {
+    text-align: center;
+}
+
+.title {
+    font-family: Arial;
+}
+
+.title h1 {
+    font-size: 5rem;
+    color: rgb(253, 253, 253);
+}
+
+.title h2 {
+    font-size: 2rem;
+    color: #f5faff;
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    font-family: 'Arial';
+}
+
+/* ===== LINKS ===== */
+a {
+    text-decoration: none;
+    color: #81dbb8;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    opacity: 0.85;
+}
+
+/* ===== NAVIGATION ===== */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 1rem;
+    background: linear-gradient(90deg, rgba(24, 58, 83, 1) 47%, rgba(49, 93, 125, 1) 91%);
+    font-size: 1.5rem;
+    flex-wrap: wrap;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.6);
+}
+
+nav .logo {
+    max-height: 50px;
+    height: auto;
+    width: auto;
+}
+
+nav a {
+    color: white;
+    margin: 0 0.25rem;
+    font-weight: 500;
+    position: relative;
+    padding: 0.3rem 0.7rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background: rgba(15, 43, 63, 1);
+    transform: scale(1.05);
+}
+
+/* ===== MAIN CONTENT ===== */
+main {
+    flex-grow: 1;
+    display: grid;
+    place-content: center;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes dimIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dim-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    animation: dimIn 0.3s ease-out forwards;
+    animation-delay: 0.1s;
+    z-index: 1;
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+/* ===== BUTTONS ===== */
+.users-btn {
+    background-color: #183A53 !important;
+}
+
+.users-btn:hover {
+    opacity: 0.85;
+}
+
+/* ===== TEAM SECTION ===== */
+.team-wrapper {
+    background: linear-gradient(90deg, rgba(24, 58, 83, 1) 47%, rgba(49, 93, 125, 1) 91%);
+    padding: 50px 0px;
+    max-height: 100vh;
+}
+
+.section-title {
+    padding: 30px 0px;
+}
+
+.section-title h2 {
+    font-size: 44px;
+    font-weight: 700;
+}
+
+.team-item {
+    position: relative;
+    background: #424248;
+    margin: 15px 5px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all .5s;
+}
+
+.team-item .item-image img {
+    width: 300px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.item-meta {
+    position: absolute;
+    background: #424248;
+    width: 300px;
+    bottom: -35px;
+    left: 0;
+    padding: 10px 20px;
+    transition: all .5s;
+}
+
+.team-item:hover .item-meta {
+    bottom: 0px;
+}
+
+.item-meta h3 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.item-meta h6 {
+    color: #ff8100;
+}
+
+.item-image img {
+    transition: all .5s;
+}
+
+.team-item:hover img {
+    background: #ff8100;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.fixed-left {
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 0px;
+    background: rgba(252, 252, 252, 0.9);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    nav a {
+        margin: 0.5rem 0;
+    }
+}
+@keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .fade-in-left {
+    animation: fadeInLeft 1s ease-out 0.5s both;
+  }
+  

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/students.style.css' %}" />
+
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="d-flex align-items-center justify-content-between mb-4">
+        <span class="fw-bold fs-5 sidebar-title">PTS System</span>
+        <button
+          class="toggle-button d-md-none"
+          onclick="toggleSidebar()"
+          id="toggleBtn"
+        >
+          <i class="bi bi-x-lg"></i>
+        </button>
+        <button
+          class="toggle-button d-none d-md-block"
+          onclick="toggleSidebar()"
+          id="desktopToggleBtn"
+        >
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+
+      <a href="javascript:void(0)" onclick="showContent('profile')"
+        ><i class="bi bi-person"></i><span class="link-text">Profile</span></a
+      >
+
+      <a href="javascript:void(0)" onclick="showContent('dashboard')"
+        ><i class="bi bi-speedometer2"></i
+        ><span class="link-text">Dashboard</span></a
+      >
+      <a href="javascript:void(0)" onclick="showContent('messages')"
+        ><i class="bi bi-chat-dots"></i
+        ><span class="link-text">Messages</span></a
+      >
+      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#requestModal">
+        <i class="bi bi-file-earmark-medical"></i>
+        <span class="link-text">Request</span>
+      </a>
+      
+      <a href="javascript:void(0)" onclick="showContent('clearance')"
+        ><i class="bi bi-clipboard2-check-fill"></i
+        ><span class="link-text">Clearance</span></a
+      >
+
+      <a href="javascript:void(0)" onclick="showContent('settings')"
+        ><i class="bi bi-gear"></i><span class="link-text">Settings</span></a
+      >
+      <a href="javascript:void(0)" onclick="showContent('logout')"
+        ><i class="bi bi-box-arrow-right"></i
+        ><span class="link-text">Logout</span></a
+      >
+    </div>
+
+    <!-- Backdrop for mobile -->
+    <div id="sidebarBackdrop" onclick="toggleSidebar()"></div>
+
+    <!-- Top Bar -->
+  
+    <div class="top-bar">
+      <button
+        class="toggle-button d-md-none"
+        onclick="toggleSidebar()"
+        id="toggleBtn"
+      >
+        <i class="bi bi-list"></i>
+      </button>
+      <span class="fw-bold system-title d-flex align-items-center gap-2">
+        <!--Subject to change-->
+        <img
+          src="{% static 'images/ptslogo.png' %}"
+          alt="ptslogo.png"
+          class="logo-img"
+        />
+        PTS College & Advanced Studies
+      </span>
+      
+      <div class="d-flex align-items-center gap-3">
+     
+        <div class="position-relative" id="registrar_dashboard_notification">
+          <i class="bi bi-bell-fill fs-5 text-white" style="cursor: pointer;"></i>
+          <span id="registrar_dashboard_notification_count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
+          4
+          </span>
+        </div>
+    
+  
+        <div class="fw-bold registrar_dashboard_user-info d-flex align-items-center gap-2 text-white">
+          <i class="bi bi-person-circle fs-4"></i>
+          <span>Name of the user</span>
+          
+        </div>
+      </div>
+    </div>
+
+ 
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div id="dashboard" class="content-section">
+          <div class="text-end text-muted mb-2 small">
+            <strong>Date:</strong> <span id="dateToday">
+            </span>
+          </div>
+        <h2 class="text-start">Dashboard</h2>
+
+        <p>Welcome, [student's name]!</p>
+        <hr class="border border-dark border-1 opacity-75 my-4" />
+
+        <div class=" mb-3">
+            <div class="col-12 col-md-6">
+              <form class="input-group">
+                <input type="text" class="form-control" placeholder="Search"
+                       aria-label="student-search" name="student-search">
+                <button class="btn btn-secondary" style="background-color: #183A53;" type="submit">Search</button>
+              </form>
+            </div>
+        </div>
+        
+        <table class="table table-bordered table-striped">
+
+          <thead class="text-center table-secondary text-white">
+
+            <tr>
+              <th scope="col">Form Types</th>
+              <th scope="col">Purpose</th>
+              <th scope="col">Status</th>
+              <th scope="col">Date and Time Requested</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+              <!-- Request Form Example-->
+              <tr class="text-center">
+                <td>Request Form</td>
+                <td>Transcript of Records</td>
+                <td>Unapproved</td>
+                <td>December 23, 2025</td>
+                <td>
+                <div class="text-center">
+                <button class="btn btn-sm text-white" style=" background-color: #183A53;"
+                 name="student-view-request-form"
+                 id="student-view-request-form"> View Form </button>
+                  </div>
+                </td>
+              </tr>
+                <!-- Clearance Form Example Enrollment-->
+              <tr class="text-center">
+                <td>Clearance Form</td>
+                <td>Enrollment</td>
+                <td>Unapproved</td>
+                <td>December 23, 2025</td>
+                <td>
+                <div class="text-center">
+                <button class="btn btn-sm text-white" style=" background-color: #183A53;"
+                 name="student-view-enroll-form"
+                 id="student-view-enroll-form"> View Form </button>
+                  </div>
+                </td>
+              </tr>
+                  <!-- Clearance Form Example Graduation-->
+                  <tr class="text-center">
+                    <td>Clearance Form</td>
+                    <td>Application for Graduation</td>
+                    <td>Unapproved</td>
+                    <td>December 23, 2025</td>
+                    <td>
+                    <div class="text-center">
+                    <button class="btn btn-sm text-white" style=" background-color: #183A53;"
+                     name="student-view-clearance-grad-form"
+                     id="student-view-clearance-grad-form"> View Form </button>
+                      </div>
+                    </td>
+                  </tr>
+     
+          </tbody>
+        </table>
+        
+      </div>
+    
+
+
+
+
+
+
+      <div id="profile" class="content-section d-none">
+        <h1>Profile</h1>
+        <p>Your profile information appears here.</p>
+      </div>
+    
+
+
+      <div id="messages" class="content-section d-none">
+        <h1>Messages</h1>
+        <p>Here are your messages.</p>
+      </div>
+
+
+    
+  
+        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header text-white" style="background-color: #183A53;">
+                <h5 class="modal-title" id="requestModalLabel">
+                  <i class="bi bi-file-earmark-medical me-2"></i>
+                  Request Credentials
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <!-- FORM START -->
+                <form id="requestForm" method="POST" action="/request/" novalidate>
+                  {% csrf_token %}
+                  
+                  <!-- Personal Information Section -->
+                  <div class="mb-4">
+                    <h6 class="text-white p-2 mb-3" style="background-color: #183A53; border-radius: 5px;">
+                      <i class="bi bi-person-fill me-2"></i>Personal Information
+                    </h6>
+                     
+                    <div class="row mb-3">
+                      <label for="firstName" class="form-label fw-semibold">Full Name: <span class="text-danger">*</span></label>
+                      <div class="col-md-3">
+                        <input type="text" name="first_name" id="firstName" class="form-control" required placeholder="First Name">
+                        <div class="invalid-feedback">Please enter your first name.</div>
+                      </div>
+                      <div class="col-md-3">
+                        <input type="text" name="middle_name" id="middleName" class="form-control" required placeholder="Middle Name">
+                        <div class="invalid-feedback">Please enter your middle name.</div>
+                      </div>
+                      <div class="col-md-3">
+                        <input type="text" name="last_name" id="lastName" class="form-control" required placeholder="Last Name">
+                        <div class="invalid-feedback">Please enter your last name.</div>
+                      </div>
+                      <div class="col-md-3">
+                        <input type="text" name="suffix" id="suffix" class="form-control" placeholder="Suffix (Optional)">
+                      </div>
+                    </div>
+        
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <label for="course" class="form-label fw-semibold">Course: <span class="text-danger">*</span></label>
+                        <select name="course" id="course" class="form-select" required>
+                          <option value="" selected disabled>Select Course</option>
+                          <option value="Bachelor of Arts in Theology">Bachelor of Arts in Theology</option>
+                          <option value="Bachelor of Theology">Bachelor of Theology</option>
+                          <option value="Bachelor of Secondary Education Major in Values Education">Bachelor of Secondary Education Major in Values Education</option>
+                          <option value="Bachelor of Elementary Education">Bachelor of Elementary Education</option>
+                          <option value="MDiv - Biblical Studies">MDiv - Biblical Studies</option>
+                          <option value="MDiv - Pastoral Studies">MDiv - Pastoral Studies</option>
+                          <option value="MA in Biblical Counseling">MA in Biblical Counseling</option>
+                          <option value="MA in Biblical Exposition">MA in Biblical Exposition</option>
+                          <option value="MA in Ministry">MA in Ministry</option>
+                          <option value="MA in Biblical Studies">MA in Biblical Studies</option>
+                          <option value="MA in Intercultural Studies">MA in Intercultural Studies</option>
+                          <option value="MA in Christian Education">MA in Christian Education</option>
+                        </select>
+                        <div class="invalid-feedback">Please select your course.</div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="birthdate" class="form-label fw-semibold">Date of Birth: <span class="text-danger">*</span></label>
+                        <input type="date" name="birthdate" id="birthdate" class="form-control" required>
+                        <div class="invalid-feedback">Please enter your date of birth.</div>
+                      </div>
+                    </div>
+        
+                    <div class="row mb-3">
+                      <div class="col-md-8">
+                        <label for="address" class="form-label fw-semibold">Address: <span class="text-danger">*</span></label>
+                        <input type="text" name="address" id="address" class="form-control" required placeholder="Complete Address">
+                        <div class="invalid-feedback">Please enter your address.</div>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="contactNumber" class="form-label fw-semibold">Contact Number: <span class="text-danger">*</span></label>
+                        <input type="tel" name="contact_number" id="contactNumber" class="form-control" required placeholder="09XXXXXXXXX" pattern="09[0-9]{9}">
+                        <div class="invalid-feedback">Please enter a valid contact number (09XXXXXXXXX).</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Request Credentials Section -->
+                  <div class="mb-4">
+                    <h6 class="text-white p-2 mb-3" style="background-color: #183A53; border-radius: 5px;">
+                      <i class="bi bi-file-earmark-check me-2"></i>Request Credentials (Please Check)
+                    </h6>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-check d-flex align-items-center mb-2">
+                          <input class="form-check-input custom-size" type="checkbox" id="diploma" name="credentials" value="Diploma">
+                          <label class="form-check-label fw-semibold ms-2" for="diploma">Diploma</label>
+                        </div>
+                        <div class="form-check d-flex align-items-center mb-2">
+                          <input class="form-check-input custom-size" type="checkbox" id="transcript" name="credentials" value="Transcript of Records">
+                          <label class="form-check-label fw-semibold ms-2" for="transcript">Transcript of Records</label>
+                        </div>
+                        <div class="form-check d-flex align-items-center mb-2">
+                          <input class="form-check-input custom-size" type="checkbox" id="dismissal" name="credentials" value="Honorable Dismissal">
+                          <label class="form-check-label fw-semibold ms-2" for="dismissal">Honorable Dismissal</label>
+                        </div>
+                      </div>
+        
+                      <div class="col-md-6">
+                        <div class="form-check d-flex align-items-center mb-2">
+                          <input class="form-check-input custom-size" type="checkbox" id="cor" name="credentials" value="COR">
+                          <label class="form-check-label fw-semibold ms-2" for="cor">COR</label>
+                        </div>
+                        <div class="form-check d-flex align-items-center mb-2">
+                          <input class="form-check-input custom-size" type="checkbox" id="certification" name="credentials" value="Certification">
+                          <label class="form-check-label fw-semibold ms-2" for="certification">Certification</label>
+                        </div>
+                        <div class="form-check d-flex align-items-center mb-2">
+                          <input class="form-check-input custom-size" type="checkbox" id="others" name="credentials" value="Others" onchange="toggleOtherInput()">
+                          <label class="form-check-label fw-semibold ms-2" for="others">Others:</label>
+                        </div>
+                        <input type="text" class="form-control mt-1" id="otherInput" name="other_credentials" placeholder="Please specify" disabled>
+                      </div>
+                    </div>
+                    
+                    <div class="alert alert-warning mt-3" role="alert">
+                      <i class="bi bi-exclamation-triangle me-2"></i>
+                      <strong>Note:</strong> At least one credential must be selected.
+                    </div>
+                  </div>
+
+                  <!-- Additional Information Section -->
+                  <div class="mb-4">
+                    <h6 class="text-white p-2 mb-3" style="background-color: #183A53; border-radius: 5px;">
+                      <i class="bi bi-info-circle me-2"></i>Additional Information
+                    </h6>
+                    
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <label for="semester" class="form-label fw-semibold">Semester Currently Enrolled:</label>
+                        <select name="semester" id="semester" class="form-select">
+                          <option value="" selected>None</option>
+                          <option value="1-2425">First Semester 2024-2025</option>
+                          <option value="2-2425">Second Semester 2024-2025</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="purpose" class="form-label fw-semibold">Purpose of Request: <span class="text-danger">*</span></label>
+                        <input type="text" name="purpose" id="purpose" class="form-control" required placeholder="e.g., Employment, Further Studies, etc.">
+                        <div class="invalid-feedback">Please specify the purpose of your request.</div>
+                      </div>
+                    </div>
+                  </div>
+        
+                  <div class="alert alert-info" role="alert">
+                    <i class="bi bi-clock me-2"></i>
+                    <strong>Office Hours Notice:</strong> The Office of the Campus Registrar processes forms on weekdays from 8:00 AM to 4:00 PM. Requests submitted outside these hours will be processed on the next business day.
+                  </div>
+        
+                  <div class="d-flex justify-content-end gap-2 mt-4">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">
+                      <i class="bi bi-x-circle me-1"></i>Cancel
+                    </button>
+                    <button class="btn text-white" type="submit" style="background-color: #183A53;">
+                      <i class="bi bi-send me-1"></i>Submit Request
+                    </button>
+                  </div>
+                </form>
+                <!-- FORM END -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+   
+
+
+
+
+
+
+
+    
+      <div id="clearance" class="content-section d-none">
+        <h1>Clearance</h1>
+        <p>Clearance status and requests.</p>
+      </div>
+    
+      <div id="graduation" class="content-section d-none">
+        <h1>Graduation</h1>
+        <p>Graduation application details.</p>
+      </div>
+    
+      <div id="settings" class="content-section d-none">
+        <h1>Settings</h1>
+        <p>Update your preferences here.</p>
+      </div>
+    
+      <div id="logout" class="content-section d-none">
+        <h1>Logout</h1>
+        <p>You are about to log out.</p>
+      </div>
+    </div>
+    
+
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const backdrop = document.getElementById("sidebarBackdrop");
+
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove("collapsed");
+          sidebar.classList.toggle("show");
+          backdrop.classList.toggle("active");
+        } else {
+          sidebar.classList.toggle("collapsed");
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const dateSpan = document.getElementById("dateToday");
+        const today = new Date();
+        const formatted = today.toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+        dateSpan.textContent = formatted;
+      });
+
+      window.addEventListener("resize", function () {
+        const sidebar = document.getElementById("sidebar");
+        const backdrop = document.getElementById("sidebarBackdrop");
+        if (window.innerWidth > 768) {
+          sidebar.classList.remove("show");
+          backdrop.classList.remove("active");
+        }
+      });
+      function toggleInput() {
+        const checkbox = document.getElementById('inlineCheckbox6');
+        const input = document.getElementById('otherInput');
+        input.disabled = !checkbox.checked;
+      }
+     
+        function showContent(id) {
+          const sections = document.querySelectorAll('.content-section');
+          sections.forEach(section => {
+            section.classList.add('d-none');
+          });
+      
+          const target = document.getElementById(id);
+          if (target) {
+            target.classList.remove('d-none');
+          }
+        }
+      
+        // Optionally show "dashboard" by default
+        document.addEventListener("DOMContentLoaded", () => {
+          showContent('dashboard');
+        });
+     
+      
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
