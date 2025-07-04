@@ -25,4 +25,5 @@ urlpatterns = [
     path('dashboard/',views.students),
     path('log-in/',views.login, name="login"),
     path("trial/", views.trial)
+
 ]

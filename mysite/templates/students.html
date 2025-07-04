@@ -49,16 +49,31 @@
         ><i class="bi bi-chat-dots"></i
         ><span class="link-text">Messages</span></a
       >
-      <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#requestModal">
+      <a href="javascript:void(0)"onclick="showContent('request')">
         <i class="bi bi-file-earmark-medical"></i>
         <span class="link-text">Request</span>
       </a>
       
-      <a href="javascript:void(0)" onclick="showContent('clearance')"
-        ><i class="bi bi-clipboard2-check-fill"></i
-        ><span class="link-text">Clearance</span></a
-      >
-
+      <a href="javascript:void(0)" onclick="showContent('clearance')">
+     <i class="bi bi-clipboard2-check-fill"></i>
+     <span class="link-text">Clearance</span>
+   </a>
+   <a href="javascript:void(0)" 
+   onclick="showContent('enrollment')">
+   <i class="bi bi-file-earmark-person-fill"></i>
+   <span class="link-text">Enrollment</span>
+</a>
+  <!--<a href="javascript:void(0)" 
+   data-bs-toggle="modal" 
+   data-bs-target="#enrollBlockedModal">
+   <i class="bi bi-gear"></i>
+   <span class="link-text">Enrollment</span>
+</a>-->
+   
+   <a href="javascript:void(0)" onclick="showContent('graduation')"
+   ><i class="bi bi-mortarboard"></i><span class="link-text">Graduation</span></a
+ >
+   
       <a href="javascript:void(0)" onclick="showContent('settings')"
         ><i class="bi bi-gear"></i><span class="link-text">Settings</span></a
       >
@@ -113,93 +128,7 @@
 
     <!-- Main Content -->
     <div class="main-content">
-      <div id="dashboard" class="content-section">
-          <div class="text-end text-muted mb-2 small">
-            <strong>Date:</strong> <span id="dateToday">
-            </span>
-          </div>
-        <h2 class="text-start">Dashboard</h2>
-
-        <p>Welcome, [student's name]!</p>
-        <hr class="border border-dark border-1 opacity-75 my-4" />
-
-        <div class=" mb-3">
-            <div class="col-12 col-md-6">
-              <form class="input-group">
-                <input type="text" class="form-control" placeholder="Search"
-                       aria-label="student-search" name="student-search">
-                <button class="btn btn-secondary" style="background-color: #183A53;" type="submit">Search</button>
-              </form>
-            </div>
-        </div>
-        
-        <table class="table table-bordered table-striped">
-
-          <thead class="text-center table-secondary text-white">
-
-            <tr>
-              <th scope="col">Form Types</th>
-              <th scope="col">Purpose</th>
-              <th scope="col">Status</th>
-              <th scope="col">Date and Time Requested</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-              <!-- Request Form Example-->
-              <tr class="text-center">
-                <td>Request Form</td>
-                <td>Transcript of Records</td>
-                <td>Unapproved</td>
-                <td>December 23, 2025</td>
-                <td>
-                <div class="text-center">
-                <button class="btn btn-sm text-white" style=" background-color: #183A53;"
-                 name="student-view-request-form"
-                 id="student-view-request-form"> View Form </button>
-                  </div>
-                </td>
-              </tr>
-                <!-- Clearance Form Example Enrollment-->
-              <tr class="text-center">
-                <td>Clearance Form</td>
-                <td>Enrollment</td>
-                <td>Unapproved</td>
-                <td>December 23, 2025</td>
-                <td>
-                <div class="text-center">
-                <button class="btn btn-sm text-white" style=" background-color: #183A53;"
-                 name="student-view-enroll-form"
-                 id="student-view-enroll-form"> View Form </button>
-                  </div>
-                </td>
-              </tr>
-                  <!-- Clearance Form Example Graduation-->
-                  <tr class="text-center">
-                    <td>Clearance Form</td>
-                    <td>Application for Graduation</td>
-                    <td>Unapproved</td>
-                    <td>December 23, 2025</td>
-                    <td>
-                    <div class="text-center">
-                    <button class="btn btn-sm text-white" style=" background-color: #183A53;"
-                     name="student-view-clearance-grad-form"
-                     id="student-view-clearance-grad-form"> View Form </button>
-                      </div>
-                    </td>
-                  </tr>
-     
-          </tbody>
-        </table>
-        
-      </div>
-    
-
-
-
-
-
-
+      
       <div id="profile" class="content-section d-none">
         <h1>Profile</h1>
         <p>Your profile information appears here.</p>
@@ -207,214 +136,237 @@
     
 
 
-      <div id="messages" class="content-section d-none">
-        <h1>Messages</h1>
-        <p>Here are your messages.</p>
-      </div>
-
-
-    
+      <div id="dashboard" class="content-section">
+        <div class="text-end text-muted mb-2 small">
+          <strong>Date:</strong> <span id="dateToday">July 3, 2025</span>
+        </div>
   
-        <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-              <div class="modal-header text-white" style="background-color: #183A53;">
-                <h5 class="modal-title" id="requestModalLabel">
-                  <i class="bi bi-file-earmark-medical me-2"></i>
-                  Request Credentials
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <!-- FORM START -->
-                <form id="requestForm" method="POST" action="/request/" novalidate>
-                  {% csrf_token %}
-                  
-                  <!-- Personal Information Section -->
-                  <div class="mb-4">
-                    <h6 class="text-white p-2 mb-3" style="background-color: #183A53; border-radius: 5px;">
-                      <i class="bi bi-person-fill me-2"></i>Personal Information
-                    </h6>
+        <h2 class="mb-1 fw-bold">Dashboard</h2>
+        <p class="text-muted">Welcome, <strong>Maria Santos</strong>!</p>
+  
+        <hr class="border border-dark border-1 opacity-50 my-3" />
+  
+        <div class="mb-4">
+          <form class="input-group col-12 col-md-4">
+            <input type="text" class="form-control" placeholder="Search form type or purpose"
+              aria-label="student-search" name="student-search">
+            <button class="btn btn-secondary" style="background-color: #183A53;" type="submit">Search</button>
+          </form>
+        </div>
+  
+        <div class="custom-table-wrapper">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Form Types</th>
+                <th>Purpose</th>
+                <th>Status</th>
+                <th>Date & Time Requested</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-bold">Request Form</td>
+                <td>Transcript of Records</td>
+                <td><span class="text-dark">Unapproved</span></td>
+                <td>Dec 23, 2025 – 10:15 AM</td>
+                <td>
+                  <button class="custom-btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#viewRequestModal">View Form</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="fw-bold">Clearance Form</td>
+                <td>Enrollment</td>
+                <td><span class="text-dark">Unapproved</span></td>
+                <td>Dec 23, 2025 – 10:20 AM</td>
+                <td>
+                  <button class="custom-btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#viewEnrollModal">View Form</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="fw-bold">Clearance Form</td>
+                <td>Application for Graduation</td>
+                <td><span class="text-dark">Unapproved</span></td>
+                <td>Dec 23, 2025 – 10:30 AM</td>
+                <td>
+                  <button class="custom-btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#viewClearanceModal">View Form</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="fw-bold">Graduation Form</td>
+                <td>Application for Graduation</td>
+                <td><span class="text-dark">Unapproved</span></td>
+                <td>Dec 23, 2025 – 10:35 AM</td>
+                <td>
+                  <button class="custom-btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#viewgraduationModal">View Form</button>
+                </td>
+                
+              </tr>
+            </tbody>
+            
+          </table>
+        </div>
+
+      </div>
+        <div id="messages" class="content-section">
+          <h1>Messages</h1>
+          <p>Here are your messages.</p>
+        </div>
+              <div id="clearance" class="content-section d-none">
+                <section class="container my-5">
+                  <!-- Step 1: Clearance Form Trigger -->
+                  <div class="text-center mb-4">
+                    <h2 class="fw-bold">Clearance Form</h2>
+                    <p class="text-muted">Click the button below to fill out the clearance form</p>
+                  </div>
+                
+                  <div class="row justify-content-center">
+                    <div class="col-md-8">
+                      <div class="card border border-2 border-dashed text-center p-4 shadow-sm" style="border-style: dashed;">
+                        <div class="card-body">
+                          <h5 class="card-title fw-semibold mb-3">Clearance Form Required</h5>
+                          <p class="card-text text-muted">You must complete the clearance form before proceeding to enrollment or graduation.</p>
+                          <button class="btn text-white" style="background-color: #183A53;" data-bs-toggle="modal" data-bs-target="#clearanceModal">
+                            Fill Out Clearance Form
+                          </button>
+                         
+                        </div>
                      
-                    <div class="row mb-3">
-                      <label for="firstName" class="form-label fw-semibold">Full Name: <span class="text-danger">*</span></label>
-                      <div class="col-md-3">
-                        <input type="text" name="first_name" id="firstName" class="form-control" required placeholder="First Name">
-                        <div class="invalid-feedback">Please enter your first name.</div>
-                      </div>
-                      <div class="col-md-3">
-                        <input type="text" name="middle_name" id="middleName" class="form-control" required placeholder="Middle Name">
-                        <div class="invalid-feedback">Please enter your middle name.</div>
-                      </div>
-                      <div class="col-md-3">
-                        <input type="text" name="last_name" id="lastName" class="form-control" required placeholder="Last Name">
-                        <div class="invalid-feedback">Please enter your last name.</div>
-                      </div>
-                      <div class="col-md-3">
-                        <input type="text" name="suffix" id="suffix" class="form-control" placeholder="Suffix (Optional)">
-                      </div>
-                    </div>
-        
-                    <div class="row mb-3">
-                      <div class="col-md-6">
-                        <label for="course" class="form-label fw-semibold">Course: <span class="text-danger">*</span></label>
-                        <select name="course" id="course" class="form-select" required>
-                          <option value="" selected disabled>Select Course</option>
-                          <option value="Bachelor of Arts in Theology">Bachelor of Arts in Theology</option>
-                          <option value="Bachelor of Theology">Bachelor of Theology</option>
-                          <option value="Bachelor of Secondary Education Major in Values Education">Bachelor of Secondary Education Major in Values Education</option>
-                          <option value="Bachelor of Elementary Education">Bachelor of Elementary Education</option>
-                          <option value="MDiv - Biblical Studies">MDiv - Biblical Studies</option>
-                          <option value="MDiv - Pastoral Studies">MDiv - Pastoral Studies</option>
-                          <option value="MA in Biblical Counseling">MA in Biblical Counseling</option>
-                          <option value="MA in Biblical Exposition">MA in Biblical Exposition</option>
-                          <option value="MA in Ministry">MA in Ministry</option>
-                          <option value="MA in Biblical Studies">MA in Biblical Studies</option>
-                          <option value="MA in Intercultural Studies">MA in Intercultural Studies</option>
-                          <option value="MA in Christian Education">MA in Christian Education</option>
-                        </select>
-                        <div class="invalid-feedback">Please select your course.</div>
-                      </div>
-                      <div class="col-md-6">
-                        <label for="birthdate" class="form-label fw-semibold">Date of Birth: <span class="text-danger">*</span></label>
-                        <input type="date" name="birthdate" id="birthdate" class="form-control" required>
-                        <div class="invalid-feedback">Please enter your date of birth.</div>
-                      </div>
-                    </div>
-        
-                    <div class="row mb-3">
-                      <div class="col-md-8">
-                        <label for="address" class="form-label fw-semibold">Address: <span class="text-danger">*</span></label>
-                        <input type="text" name="address" id="address" class="form-control" required placeholder="Complete Address">
-                        <div class="invalid-feedback">Please enter your address.</div>
-                      </div>
-                      <div class="col-md-4">
-                        <label for="contactNumber" class="form-label fw-semibold">Contact Number: <span class="text-danger">*</span></label>
-                        <input type="tel" name="contact_number" id="contactNumber" class="form-control" required placeholder="09XXXXXXXXX" pattern="09[0-9]{9}">
-                        <div class="invalid-feedback">Please enter a valid contact number (09XXXXXXXXX).</div>
                       </div>
                     </div>
                   </div>
-
-                  <!-- Request Credentials Section -->
-                  <div class="mb-4">
-                    <h6 class="text-white p-2 mb-3" style="background-color: #183A53; border-radius: 5px;">
-                      <i class="bi bi-file-earmark-check me-2"></i>Request Credentials (Please Check)
-                    </h6>
-
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-check d-flex align-items-center mb-2">
-                          <input class="form-check-input custom-size" type="checkbox" id="diploma" name="credentials" value="Diploma">
-                          <label class="form-check-label fw-semibold ms-2" for="diploma">Diploma</label>
-                        </div>
-                        <div class="form-check d-flex align-items-center mb-2">
-                          <input class="form-check-input custom-size" type="checkbox" id="transcript" name="credentials" value="Transcript of Records">
-                          <label class="form-check-label fw-semibold ms-2" for="transcript">Transcript of Records</label>
-                        </div>
-                        <div class="form-check d-flex align-items-center mb-2">
-                          <input class="form-check-input custom-size" type="checkbox" id="dismissal" name="credentials" value="Honorable Dismissal">
-                          <label class="form-check-label fw-semibold ms-2" for="dismissal">Honorable Dismissal</label>
-                        </div>
-                      </div>
-        
-                      <div class="col-md-6">
-                        <div class="form-check d-flex align-items-center mb-2">
-                          <input class="form-check-input custom-size" type="checkbox" id="cor" name="credentials" value="COR">
-                          <label class="form-check-label fw-semibold ms-2" for="cor">COR</label>
-                        </div>
-                        <div class="form-check d-flex align-items-center mb-2">
-                          <input class="form-check-input custom-size" type="checkbox" id="certification" name="credentials" value="Certification">
-                          <label class="form-check-label fw-semibold ms-2" for="certification">Certification</label>
-                        </div>
-                        <div class="form-check d-flex align-items-center mb-2">
-                          <input class="form-check-input custom-size" type="checkbox" id="others" name="credentials" value="Others" onchange="toggleOtherInput()">
-                          <label class="form-check-label fw-semibold ms-2" for="others">Others:</label>
-                        </div>
-                        <input type="text" class="form-control mt-1" id="otherInput" name="other_credentials" placeholder="Please specify" disabled>
-                      </div>
-                    </div>
-                    
-                    <div class="alert alert-warning mt-3" role="alert">
-                      <i class="bi bi-exclamation-triangle me-2"></i>
-                      <strong>Note:</strong> At least one credential must be selected.
-                    </div>
-                  </div>
-
-                  <!-- Additional Information Section -->
-                  <div class="mb-4">
-                    <h6 class="text-white p-2 mb-3" style="background-color: #183A53; border-radius: 5px;">
-                      <i class="bi bi-info-circle me-2"></i>Additional Information
-                    </h6>
-                    
-                    <div class="row mb-3">
-                      <div class="col-md-6">
-                        <label for="semester" class="form-label fw-semibold">Semester Currently Enrolled:</label>
-                        <select name="semester" id="semester" class="form-select">
-                          <option value="" selected>None</option>
-                          <option value="1-2425">First Semester 2024-2025</option>
-                          <option value="2-2425">Second Semester 2024-2025</option>
-                        </select>
-                      </div>
-                      <div class="col-md-6">
-                        <label for="purpose" class="form-label fw-semibold">Purpose of Request: <span class="text-danger">*</span></label>
-                        <input type="text" name="purpose" id="purpose" class="form-control" required placeholder="e.g., Employment, Further Studies, etc.">
-                        <div class="invalid-feedback">Please specify the purpose of your request.</div>
-                      </div>
-                    </div>
-                  </div>
-        
-                  <div class="alert alert-info" role="alert">
-                    <i class="bi bi-clock me-2"></i>
-                    <strong>Office Hours Notice:</strong> The Office of the Campus Registrar processes forms on weekdays from 8:00 AM to 4:00 PM. Requests submitted outside these hours will be processed on the next business day.
-                  </div>
-        
-                  <div class="d-flex justify-content-end gap-2 mt-4">
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">
-                      <i class="bi bi-x-circle me-1"></i>Cancel
-                    </button>
-                    <button class="btn text-white" type="submit" style="background-color: #183A53;">
-                      <i class="bi bi-send me-1"></i>Submit Request
-                    </button>
-                  </div>
-                </form>
-                <!-- FORM END -->
+                  {% include 'includes/clearanceform.html' %}
+                </section>
               </div>
+            
+              <div id="messages" class="content-section">
+                <h1>Messages</h1>
+                <p>Here are your messages.</p>
+              </div>
+
+              <div id="request" class="content-section d-none">
+                <section class="container my-5">
+                  <!-- Step 1: Request Form Trigger -->
+                  <div class="text-center mb-4">
+                    <h2 class="fw-bold">Request Form</h2>
+                    <p class="text-muted">Click the button below to fill out the request form.</p>
+                  </div>
+                
+                  <div class="row justify-content-center">
+                    <div class="col-md-8">
+                      <div class="card border border-2 border-dashed text-center p-4 shadow-sm" style="border-style: dashed;">
+                        <div class="card-body">
+                          <h5 class="card-title fw-semibold mb-3">Request Documents here</h5>                   
+                          <button class="btn text-white" style="background-color: #183A53;" data-bs-toggle="modal" data-bs-target="#requestModal">
+                            Fill Out Request Form
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% include 'includes/requestform.html' %}
+                </section>
+                
+              </div>
+             
+
+              <div id="enrollment" class="content-section d-none">
+                <section class="container my-5">               
+                  <div class="text-center mb-4">
+                    <h2 class="fw-bold">Enrollment Form</h2>
+                    <p class="text-muted">Click the button below to fill out your enrollment form</p>
+                  </div>
+                
+                  <div class="row justify-content-center">
+                    <div class="col-md-8">
+                      <div class="card border border-2 border-dashed text-center p-4 shadow-sm" style="border-style: dashed;">
+                        <div class="card-body">
+                          <h5 class="card-title fw-semibold mb-3">Enrollment Form</h5>
+                          <p class="card-text text-muted">Please fill up the enrollment form to finish enrollment process.</p>
+                          <button class="btn text-white" style="background-color: #183A53;" data-bs-toggle="modal" data-bs-target="#enrollmentModal">
+                            Fill Out Enrollment Form
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                {% include 'includes/enrollmentform.html' %}
+              </div>
+
+<!-- Modal: Enrollment Blocked -->
+<div class="modal fade" id="enrollBlockedModal" tabindex="-1" aria-labelledby="enrollBlockedModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #183A53;">
+        <h6 class="modal-title fw-semibold" id="enrollBlockedModalLabel">Clearance Form Required.</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="mb-0">Please fill up the Clearance Form.</p>
+      </div>  
+    </div>
+  </div>
+</div>
+
+
+              <div id="graduation" class="content-section d-none">
+                <section class="container my-5">     
+                  <div class="text-center mb-4">
+                    <h2 class="fw-bold">Graduation Form</h2>
+                    <p class="text-muted">Click the button below to fill out your graduation form</p>
+                  </div>
+                
+                  <div class="row justify-content-center">
+                    <div class="col-md-8">
+                      <div class="card border border-2 border-dashed text-center p-4 shadow-sm" style="border-style: dashed;">
+                        <div class="card-body">
+                          <h5 class="card-title fw-semibold mb-3">Graduation Form</h5>
+                          <p class="card-text text-muted">Please fill up the graduation form.</p>
+                          <button class="btn text-white" style="background-color: #183A53;"
+                           data-bs-toggle="modal" data-bs-target="#graduationModal">
+                            Fill Out Graduation Form
+                          </button>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                {% include 'includes/graduationform.html' %}
+              </div>
+            
+              <div id="settings" class="content-section d-none">
+                <h1>Settings</h1>
+                <p>Update your preferences here.</p>
+              </div>
+            
+              <div id="logout" class="content-section d-none">
+                <h1>Logout</h1>
+                <p>You are about to log out.</p>
+              </div>
+            </div>
+
             </div>
           </div>
         </div>
-
         
-   
+        {% include 'includes/view-graduation.html' %}
+        {% include 'includes/view-request.html' %}
+        {% include 'includes/view-clearance.html' %}
+     
 
 
 
-
-
-
-
-    
-      <div id="clearance" class="content-section d-none">
-        <h1>Clearance</h1>
-        <p>Clearance status and requests.</p>
-      </div>
-    
-      <div id="graduation" class="content-section d-none">
-        <h1>Graduation</h1>
-        <p>Graduation application details.</p>
-      </div>
-    
-      <div id="settings" class="content-section d-none">
-        <h1>Settings</h1>
-        <p>Update your preferences here.</p>
-      </div>
-    
-      <div id="logout" class="content-section d-none">
-        <h1>Logout</h1>
-        <p>You are about to log out.</p>
-      </div>
-    </div>
-    
 
     <script>
       function toggleSidebar() {
@@ -469,58 +421,79 @@
       }
 
       function initializeFormValidation() {
-        const form = document.getElementById('requestForm');
-        
-        if (form) {
-          // Custom validation for checkboxes
-          form.addEventListener('submit', function(event) {
+        const requestForm = document.getElementById('requestForm');
+        const clearanceForm = document.getElementById('clearanceForm');
+      
+        // Request Form validation
+        if (requestForm) {
+          requestForm.addEventListener('submit', function(event) {
             event.preventDefault();
             event.stopPropagation();
-            
-            // Check if at least one credential is selected
-            const credentialCheckboxes = form.querySelectorAll('input[name="credentials"]:checked');
+      
+            const credentialCheckboxes = requestForm.querySelectorAll('input[name="credentials"]:checked');
+            const othersCheckbox = document.getElementById('others');
+            const otherInput = document.getElementById('otherInput');
+      
             if (credentialCheckboxes.length === 0) {
               showAlert('Please select at least one credential.', 'warning');
               return;
             }
-            
-            // Check if "Others" is selected but no specification provided
-            const othersCheckbox = document.getElementById('others');
-            const otherInput = document.getElementById('otherInput');
+      
             if (othersCheckbox.checked && !otherInput.value.trim()) {
               showAlert('Please specify what other credential you need.', 'warning');
               otherInput.focus();
               return;
             }
-            
-            // If validation passes, submit the form
-            if (form.checkValidity()) {
+      
+            if (requestForm.checkValidity()) {
               showAlert('Request submitted successfully!', 'success');
-              form.submit();
+              requestForm.submit();
             } else {
-              form.classList.add('was-validated');
+              requestForm.classList.add('was-validated');
+            }
+          });
+        }
+      
+        // Clearance Form validation
+        if (clearanceForm) {
+          clearanceForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+      
+            if (clearanceForm.checkValidity()) {
+              showAlert('Clearance submitted successfully!', 'success');
+              clearanceForm.submit();
+            } else {
+              clearanceForm.classList.add('was-validated');
             }
           });
         }
       }
-
       function initializeModalEvents() {
-        const modal = document.getElementById('requestModal');
-        
-        if (modal) {
-          // Reset form when modal is hidden
-          modal.addEventListener('hidden.bs.modal', function () {
+        const requestModal = document.getElementById('requestModal');
+        const clearanceModal = document.getElementById('clearanceModal');
+      
+        if (requestModal) {
+          requestModal.addEventListener('hidden.bs.modal', function () {
             const form = document.getElementById('requestForm');
             if (form) {
               form.reset();
               form.classList.remove('was-validated');
-              
-              // Reset other input
               const otherInput = document.getElementById('otherInput');
               if (otherInput) {
                 otherInput.disabled = true;
                 otherInput.value = '';
               }
+            }
+          });
+        }
+      
+        if (clearanceModal) {
+          clearanceModal.addEventListener('hidden.bs.modal', function () {
+            const form = document.getElementById('clearanceForm');
+            if (form) {
+              form.reset();
+              form.classList.remove('was-validated');
             }
           });
         }
@@ -548,25 +521,26 @@
         }, 5000);
       }
      
-      function showContent(id) {
-        const sections = document.querySelectorAll('.content-section');
-        sections.forEach(section => {
-          section.classList.add('d-none');
-        });
-    
-        const target = document.getElementById(id);
-        if (target) {
-          target.classList.remove('d-none');
-        }
-      }
-    
-      // Optionally show "dashboard" by default
-      document.addEventListener("DOMContentLoaded", () => {
-        showContent('dashboard');
-      });
      
+        function showContent(sectionId) {
+          const sections = document.querySelectorAll('.content-section');
+          sections.forEach(section => section.classList.add('d-none'));
+      
+          const target = document.getElementById(sectionId);
+          if (target) {
+            target.classList.remove('d-none');
+          }
+        }
+      
+        document.addEventListener("DOMContentLoaded", () => {
+          showContent('dashboard'); // Show dashboard by default
+        });
+      </script>
+      
       
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  
   </body>
 </html>

@@ -11,11 +11,7 @@
 
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   
-  <style>
-
-
   
-  </style>
 </head>
 <body class="bg-light">
   {% include 'navbar.html' %}
@@ -29,21 +25,14 @@
 <div class="carousel-item active position-relative">
   <img src="{% static 'images/registrar.png' %}" class="d-block w-100 object-fit-cover" style="max-height: 75vh;" alt="Registrar">
 
-  <!-- Dim entire slide if needed -->
-  <div class="dim-overlay position-absolute top-0 start-0 w-100 h-100"></div>
-
-  <!-- Dim only the top (text area) -->
-  <div class="top-dim position-absolute top-0 start-0 w-100" style="height: 40vh;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent); z-index: 1;">
-  </div>
-
   <!-- Text content -->
-  <div class="position-absolute top-50 start-10 text-white px-5 fade-in-left" style="z-index: 2;">
+  <div class="position-absolute top-50 start-10 text-white px-3 px-md-5 fade-in-left" style="z-index: 2;">
     <h1 class="fw-bold display-4 display-md-2 display-lg-1 text-shadow" style="font-size:5rem;">Office of the Registrar</h1>
     <h2 class="fs-5 fs-md-4 fs-lg-3 text-shadow">PTS College & Advanced Studies</h2>
     <button 
       class="btn btn-outline-light bg-transparent border-1 text-white"
-      onclick="window.location.href='{% url 'login' %}'">
+      data-url="{% url 'login' %}"
+      onclick="window.location.href=this.getAttribute('data-url')">
       Log in
     </button>
   </div>
@@ -53,39 +42,37 @@
         <!-- Slide 2 -->
         <div class="carousel-item">
           <img src="{% static 'images/church.png' %}" class="d-block w-100 object-fit-cover" style="max-height: 75vh;" alt="Church">
-          <div class="dim-overlay position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
+         
   
           <div class="position-absolute top-50 start-50 translate-middle text-white px-4 text-center w-100 d-flex flex-column align-items-center justify-content-center" style="z-index: 2;">
-            <h1 class="fw-bold display-4 text-shadow fade-in-left" style="font-size: 5rem; color:rgb(255, 255, 255);">Campus e-Services</h1>
+            <h1 class="fw-bold display-4 text-shadow fade-in-left" style="font-size: 3rem; color:rgb(255, 255, 255);">Campus e-Services</h1>
           
   
             <!-- Animated Cards -->
             <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
   
               <!-- Card 1: Request -->
-              <div class="text-dark shadow rounded-4 fade-in-up" style="width: 50rem; animation-delay: 0.5s;">
-                <div class="card-body text-start p-0">
-                  <div style="background-color:rgb(24, 58, 83, 0.9); padding: 1rem;" class="d-flex align-items-center gap-2">
-                    <i class="bi bi-file-earmark-medical text-white fs-3"></i>
-                    <div>
-                      <h1 class="m-0 text-white fs-2">Request</h1>
-                    </div>
-                    <div class="text-start" style="margin-left:15rem;">
-                      <p class="fs-5 text-white mb-0">Request Credentials.</p>
+              <div class="carousel-card text-dark shadow rounded-4 fade-in-up">
+                <div class="text-start p-0">
+                  <div class="carousel-title d-flex align-items-center gap-2">
+                    <i class="bi bi-file-earmark-medical text-white fs-3 carousel-logo"></i>
+                      <h3 class="m-0 text-white">Request</h3>
+                    <div class="text-start carousel-desc">
+                      <p class="fs-6 text-white mb-0">Request Credentials.</p>
                     </div>
                   </div>
                 </div>
               </div>  
               <!-- Card 2: Clearance -->
-              <div class="text-dark shadow rounded-4 fade-in-up" style="width: 50rem; animation-delay: 0.7s;">
-                <div class="card-body text-start p-0">
-                  <div style="background-color:rgb(24, 58, 83, 0.9); padding: 1rem;" class="d-flex align-items-center gap-2">
+              <div class="carousel-card text-dark shadow rounded-4 fade-in-up" style="width: 50rem; animation-delay: 0.7s;">
+                <div class="text-start p-0">
+                  <div class="carousel-title d-flex align-items-center gap-2">
                     <i class="bi bi-file-earmark-check text-white fs-3"></i>
                     <div>
-                      <h1 class="m-0 text-white fs-2">Clearance</h1>
+                      <h3 class="m-0 text-white">Clearance</h3>
                     </div>
-                    <div class="text-start" style="margin-left:13rem;">
-                      <p class="fs-5 text-white mb-0">Apply for clearance.</p>
+                    <div class="text-start" style="margin-left:14rem;">
+                      <p class="fs-6 text-white mb-0">Apply for clearance.</p>
                     </div>
                   </div>
                 </div>
@@ -97,10 +84,10 @@
                   <div style="background-color:rgb(24, 58, 83, 0.9); padding: 1rem;" class="d-flex align-items-center gap-2">
                     <i class="bi bi-mortarboard text-white fs-3"></i>
                     <div>
-                      <h1 class="m-0 text-white fs-2">Graduation</h1>
+                      <h3 class="m-0 text-white fs-2">Graduation</h3>
                     </div>
                     <div class="text-start" style="margin-left:12rem;">
-                      <p class="fs-5 text-white mb-0">Apply for graduation.</p>
+                      <p class="fs-6 text-white mb-0">Apply for graduation.</p>
                     </div>
                   </div>
                 </div>
@@ -114,8 +101,7 @@
         <div class="carousel-item">
           <img src="{% static 'images/room.png' %}" class="d-block w-100 object-fit-cover" style="max-height: 75vh;" alt="Room">
   
-          <!-- Dim overlay -->
-          <div class="dim-overlay position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
+        
   
           <!-- Content -->
           <div class="position-absolute top-50 start-10 text-white px-5 fade-in-left" style="z-index: 2;">
@@ -123,8 +109,9 @@
             <h2 class="fs-5 fs-md-4 fs-lg-3 text-shadow">PTS College & Advanced Studies</h2>
             <button 
             class="btn btn-outline-light bg-transparent border-1 text-white mt-3"
-            onclick="window.location.href='https://ptscas.edu.ph'">
+            onclick="window.location.href='https://ptscas.edu.ph';">
             Visit site
+          </button>
           </div>
         </div>
   
@@ -161,9 +148,9 @@
       <div class="col-12">
         <div class="container-fluid bg-light border shadow">
           <div class="row">
-            <div class="col-12 col-md-4 p-0">
-              <div class="card border-0 bg-transparent">
-                <div class="card-body text-center p-5">
+            <div class="col-12 col-md-4 p-0 mb-3 mb-md-0">
+              <div class="card border-0 bg-transparent h-100">
+                <div class="card-body text-center p-3 p-md-5">
                   <i class="bi bi-file-earmark-medical text-black fs-1"></i>
                   
                   <h4 class="fw-bold text-uppercase mb-4"
@@ -174,9 +161,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 col-md-4 p-0 border-top border-bottom border-start border-end">
-              <div class="card border-0 bg-transparent">
-                <div class="card-body text-center p-5">
+            <div class="col-12 col-md-4 p-0 border-top border-bottom border-start border-end mb-3 mb-md-0">
+              <div class="card border-0 bg-transparent h-100">
+                <div class="card-body text-center p-3 p-md-5">
                   <i class="bi bi-file-earmark-check text-black fs-1"></i>
                   <h4 class="fw-bold text-uppercase mb-4"
                   style="color:rgb(69, 57, 49);" 
@@ -187,8 +174,8 @@
               </div>
             </div>
             <div class="col-12 col-md-4 p-0">
-              <div class="card border-0 bg-transparent">
-                <div class="card-body text-center p-5">
+              <div class="card border-0 bg-transparent h-100">
+                <div class="card-body text-center p-3 p-md-5">
                   <i class="bi bi-mortarboard text-black fs-1"></i>
                   <h4 class="fw-bold text-uppercase mb-4"
                   style="color:rgb(69, 57, 49);" 
@@ -224,7 +211,7 @@
         <ol class="fs-5 lh-lg mb-0">
           <li>Sign up as either a <strong>student</strong> or <strong>alumni</strong>.</li>
           <li>Check your email for the <strong>verification code</strong> sent by the system.</li>
-          <li>Log in and click <strong>“Request”</strong> on the sidebar.</li>
+          <li>Log in and click <strong>"Request"</strong> on the sidebar.</li>
           <li>Fill out the <strong>request form</strong> and click <strong>Submit</strong>.</li>
           <li>Wait for a <strong>confirmation email</strong> with your appointment details to claim your requested document.</li>
         </ol>
@@ -275,7 +262,7 @@
       </h3>
           <button 
             class="btn btn-outline-light bg-transparent border-1 text-white mt-3"
-            onclick="window.location.href='https://web.facebook.com/ptscas'">
+            onclick="window.location.href='https://web.facebook.com/ptscas';">
             Visit Facebook
           </button>
         </div>
@@ -284,30 +271,29 @@
     </div>
   </section>
   
-    <!-- ABOUT US SECTION -->
+ <!-- ABOUT US SECTION -->
 <section 
-id="about-us"
-class="scroll-section position-relative"
-style="min-height: 80vh;"
+  id="about-us"
+  class="scroll-section position-relative d-flex align-items-center justify-content-center"
+  style="min-height: 80vh;"
 >
-<!-- Background Blurred Image -->
-<img 
-  src="{% static 'images/registrar.png' %}" 
-  class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
-  style="filter: blur(2px); z-index: 0; object-fit: cover;" 
-  alt="Room"
->
-  <!-- Dim overlay -->
-  <div class="dim-overlay position-absolute top-0 start-0 w-100 h-100" 
-  style="background-color: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
+  <!-- Background Blurred Image -->
+  <img 
+    src="{% static 'images/registrar.png' %}" 
+    class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+    style="filter: blur(2px); z-index: 0;" 
+    alt="Room"
+  >
 
-<!-- Foreground Content Centered -->
-<div 
-  class="position-absolute top-50 start-50 translate-middle w-100 px-3"
-  style="z-index: 1;"
->
-  <div class="container text-center text-white">
-    <div class="row justify-content-center align-items-center">
+  <!-- Dim overlay -->
+  <div 
+    class="dim-overlay position-absolute top-0 start-0 w-100 h-100" 
+    style="background-color: rgba(0, 0, 0, 0.5); z-index: 1;"
+  ></div>
+
+  <!-- Main Container -->
+  <div class="container position-relative" style="z-index: 2;">
+    <div class="row justify-content-center align-items-center text-center text-white">
       
       <!-- Logo -->
       <div class="col-12 mb-4">
@@ -321,99 +307,101 @@ style="min-height: 80vh;"
         >
       </div>
       
-      <!-- About Us Heading -->
-      <div class="col-lg-8">
+      <!-- About Us Content -->
+      <div class="col-lg-8 col-md-10 col-sm-12">
         <h1 
-          class="fw-bold"
+          class="fw-bold display-5"
           data-aos="fade-in" 
           data-aos-duration="1000"
           style="color: rgb(223, 242, 255);"
         >
           About Us
         </h1>
-        <p class="fs-5 mt-3" style="line-height: 1.6;"
-        data-aos="fade-in" 
-        data-aos-duration="1000">
+        <p 
+          class="fs-6 fs-md-5 mt-3"
+          style="line-height: 1.6;"
+          data-aos="fade-in" 
+          data-aos-duration="1000"
+        >
           PTS College & Advanced Studies is committed to delivering high-quality education rooted in academic excellence and Christian values. We aim to empower students with the knowledge and skills needed to serve their communities and the world.
         </p>
       </div>
 
     </div>
   </div>
-</div>
 </section>
 
-  
-    <!-- OUR TEAM SECTION -->
-  
-    <section id="ourteam" class="team-wrapper">
 
-
-      <div class="container">
-          <div class="row">
-              <div class="col-md-12 text-center text-light">
-                  <div class="section-title">
-                      <h3>Our Team</h3>
-                      
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <!-- Our Team item start -->
-              <div class="col-md-3 col-sm-6">
-                  <div class="team-item">
-                      <div class="item-image">
-                          <img src={% static 'images/our-team.png' %} alt="" width="100%">
-                      </div>
-                      <div class="item-meta">
-                          <h3 class="item-title">Juliette E. Baccay</h3>
-                          <h6 class="item-position">Web Developer</h6>
-                      </div>
-                  </div>
-              </div>
-              <!-- Our Team item end -->
-              <!-- Our Team item start -->
-              <div class="col-md-3 col-sm-6">
-                  <div class="team-item">
-                      <div class="item-image">
-                          <img src={% static 'images/our-team.png' %} alt="" width="100%">
-                      </div>
-                      <div class="item-meta">
-                          <h3 class="item-title">Mary Moreene V. Valdez</h3>
-                          <h6 class="item-position">Web Developer</h6>
-                      </div>
-                  </div>
-              </div>
-              <!-- Our Team item end -->
-              <!-- Our Team item start -->
-              <div class="col-md-3 col-sm-6">
-                  <div class="team-item">
-                      <div class="item-image">
-                          <img src={% static 'images/our-team.png' %} alt="" width="100%">
-                      </div>
-                      <div class="item-meta">
-                          <h3 class="item-title">Alexa R. Dela Cruz</h3>
-                          <h6 class="item-position">Web Developer</h6>
-                      </div>
-                  </div>
-              </div>
-              <!-- Our Team item end -->
-              <!-- Our Team item start -->
-              <div class="col-md-3 col-sm-6">
-                  <div class="team-item">
-                      <div class="item-image">
-                          <img src={% static 'images/our-team.png' %} alt="" width="100%">
-                      </div>
-                      <div class="item-meta">
-                          <h3 class="item-title"> Reynald Ace M. Pilpil</h3>
-                          <h6 class="item-position">Web Developer</h6>
-                      </div>
-                  </div>
-              </div>
-              <!-- Our Team item end -->
-          </div>
+  
+   <!-- Team 1 - Bootstrap Brain Component -->
+<section class="bg-light py-3 py-md-5 py-xl-8">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+        <h2 class="mb-4 display-5 text-center">Our Team</h2>
+        <p class="text-secondary mb-5 text-center lead fs-4">We are a group of innovative, experienced, and proficient teams. You will love to collaborate with us.</p>
+        <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
       </div>
-  </section>
+    </div>
+  </div>
+
+  <div class="container overflow-hidden">
+    <div class="row gy-4 gy-lg-0 gx-xxl-5">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
+          <div class="card-body p-0">
+            <figure class="m-0 p-0">
+              <img class="img-fluid" loading="lazy" src="{% static 'images/our-team.png' %}" alt="Flora Nyra">
+              <figcaption class="m-0 p-4 text-center">
+                <h5 class="mb-1">Juliette E. Baccay</h5>
+                <p class="text-secondary mb-0 fs-5">Web Developer</p>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
+          <div class="card-body p-0">
+            <figure class="m-0 p-0">
+              <img class="img-fluid" loading="lazy" src="{% static 'images/our-team.png' %}" alt="Evander Mac">
+              <figcaption class="m-0 p-4 text-center">
+                <h5 class="mb-1">Mary Moreene V. Valdez</h5>
+                <p class="text-secondary mb-0 fs-5">Web Developer</p>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
+          <div class="card-body p-0">
+            <figure class="m-0 p-0">
+              <img class="img-fluid" loading="lazy" src="{% static 'images/our-team.png' %}" alt="Taytum Elia">
+              <figcaption class="m-0 p-4 text-center">
+                <h5 class="mb-1">Reynald Ace M. Pilpil</h5>
+                <p class="text-secondary mb-0 fs-5">Web Developer</p>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card border-0 border-bottom border-primary shadow-sm overflow-hidden">
+          <div class="card-body p-0">
+            <figure class="m-0 p-0">
+              <img class="img-fluid" loading="lazy" src="{% static 'images/our-team.png' %}" alt="Wylder Elio">
+              <figcaption class="m-0 p-4 text-center">
+                <h5 class="mb-1">Alexa R. Dela Cruz</h5>
+                <p class="text-secondary mb-0 fs-5">Web Developer</p>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     </section>
 
    

@@ -1,0 +1,153 @@
+/* ===== GRADUATION MODAL STYLES (NO GREEN) ===== */
+#graduationModal .modal-header {
+    border-bottom: none;
+    border-radius: 0.375rem 0.375rem 0 0;
+    background-color: #3B4F66;
+  }
+  #graduationModal .modal-sub-header {
+    border-radius: 0.375rem;
+    background-color: #3B4F66;
+  }
+  
+  #graduationModal .modal-content {
+    border: none;
+    border-radius: 0.375rem;
+  }
+  
+  #graduationModal .form-label {
+    color: #495057;
+    margin-bottom: 0.5rem;
+  }
+  
+  #graduationModal .form-control:focus,
+  #graduationModal .form-select:focus {
+    border-color: #183A53;
+    box-shadow: 0 0 0 0.2rem rgba(24, 58, 83, 0.25);
+  }
+  
+  #graduationModal .form-control.is-invalid,
+  #graduationModal .form-select.is-invalid {
+    border-color: #dc3545;
+  }
+  
+  #graduationModal .form-control.is-valid,
+  #graduationModal .form-select.is-valid {
+    border-color: #0d6efd;
+  }
+  
+  #graduationModal .invalid-feedback,
+  #graduationModal .valid-feedback {
+    font-size: 0.875rem;
+  }
+  
+  #graduationModal .invalid-feedback {
+    color: #dc3545;
+  }
+  
+  #graduationModal .valid-feedback {
+    color: #0d6efd;
+  }
+  
+  #graduationModal .alert {
+    border-radius: 0.375rem;
+    border: none;
+  }
+  
+  #graduationModal .alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border-left: 4px solid #ffc107;
+  }
+  
+  #graduationModal .alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border-left: 4px solid #17a2b8;
+  }
+  
+  #graduationModal .btn {
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  #graduationModal .btn-submit {
+    background-color: #506A87;
+    color: white;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+  }
+  #graduationModal .btn-addrow {
+    background-color: #506A87;
+    color: white;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  #graduationModal .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+  }
+  
+  #graduationModal .btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    #graduationModal .modal-dialog {
+      margin: 0.5rem;
+    }
+    #graduationModal .col-md-3,
+    #graduationModal .col-md-6,
+    #graduationModal .col-md-8,
+    #graduationModal .col-md-4 {
+      margin-bottom: 1rem;
+    }
+    #graduationModal .d-flex.justify-content-end {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    #graduationModal .btn {
+      width: 100%;
+    }
+  }
+  
+  /* Animation */
+  #graduationModal .mb-4 {
+    animation: fadeInUp 0.7s ease-out;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 0.5;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Scrollbar */
+  #graduationModal .modal-body {
+    scrollbar-width: thin;
+    scrollbar-color: #2F3F53 #f8f9fa;
+  }
+  #graduationModal .modal-body::-webkit-scrollbar {
+    width: 6px;
+  }
+  #graduationModal .modal-body::-webkit-scrollbar-track {
+    background: #f8f9fa;
+    border-radius: 3px;
+  }
+  #graduationModal .modal-body::-webkit-scrollbar-thumb {
+    background: #2F3F53;
+    border-radius: 3px;
+  }
+  #graduationModal .modal-body::-webkit-scrollbar-thumb:hover {
+    background: #36536E;
+  }
+  

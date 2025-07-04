@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>View Clearance Form</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/clearanceform.style.css' %}" />
+  </head>
+  <body>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="viewClearanceModal"
+      tabindex="-1"
+      aria-labelledby="viewClearanceModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+      >
+        <div class="modal-content">
+          <div class="modal-header text-white">
+            <h6 class="modal-title" id="viewClearanceModalLabel">
+              <i class="bi bi-file-earmark-check me-2"></i> Clearance Form
+            </h6>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- FORM START -->
+            <form id="viewClearanceForm" method="POST" action="/" novalidate>
+              {% csrf_token %}
+
+              <!-- Personal Information Section -->
+              <div class="mb-4">
+                <div class="row mb-3">
+                  <label for="firstName" class="form-label fw-semibold"
+                    >Full Name: <span class="text-danger">*</span></label
+                  >
+                  <div class="col-md-3">
+                    <input
+                      type="text"
+                      class="form-control-plaintext text-secondary fw-bold fs-5"
+                      value="{{ user.clearance_firstName|default:'Lea' }}"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-md-3">
+                    <input
+                      type="text"
+                      class="form-control-plaintext text-secondary fw-bold fs-5"
+                      value="{{ user.clearance_middleName|default:'Libertad' }}"
+                      readonly
+                    />
+                    <div class="invalid-feedback">
+                      Please enter your middle name.
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <input
+                      type="text"
+                      class="form-control-plaintext text-secondary fw-bold fs-5"
+                      value="{{ user.clearance_lastName|default:'Luna' }}"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-md-3">
+                    <input
+                      type="text"
+                      class="form-control-plaintext text-secondary fw-bold fs-5"
+                      value="{{ user.clearance_suffix|default:'L' }}"
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <!-- Year, Section, ID -->
+                <div class="row mb-3">
+                  <div class="col-md-4">
+                    <label for="clearance-year" class="form-label fw-semibold"
+                      >Year: <span class="text-danger">*</span></label
+                    >
+                    <input
+                      type="text"
+                      class="form-control-plaintext text-secondary fw-bold fs-5"
+                      value="{{ user.clearance_year|default:'2000' }}"
+                      readonly
+                    />
+                    <div class="invalid-feedback">Please enter your year.</div>
+                  </div>
+                  <div class="col-md-4">
+                    <label
+                      for="clearance-section"
+                      class="form-label fw-semibold"
+                      >Section: <span class="text-danger">*</span></label
+                    >
+                    <input
+                      type="text"
+                      class="form-control-plaintext text-secondary fw-bold fs-5"
+                      value="{{ user.clearance_section|default:'3' }}"
+                      readonly
+                    />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="clearance-idnum" class="form-label fw-semibold"
+                      >ID Number: <span class="text-danger">*</span></label
+                    >
+                    <input
+                      type="text"
+                      class="form-control-plaintext text-secondary fw-bold fs-5"
+                      value="{{ user.clearance_idnum|default:'PTS-3424' }}"
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <!-- Course and Date -->
+                <div class="row mb-3">
+                  <div class="col-md-7">
+                    <label
+                      for="clearance-course"
+                      class="form-label fw-semibold"
+                      >Course: <span class="text-danger">*</span></label
+                    >
+                    <select
+                      name="clearance-course-display"
+                      id="clearance_course"
+                      class="form-control-plaintext text-secondary fw-bold fs-5"
+                      disabled
+                    >
+                      <option selected>
+                        {{ user.course|default:"Bachelor of Theology" }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-md-5">
+                    <label for="clearance-date" class="form-label fw-semibold"
+                      >Date: <span class="text-danger">*</span></label
+                    >
+                    <input
+                      type="date"
+                      name="clearance-date"
+                      id="clearance-date"
+                      class="form-control-plaintext text-secondary fw-bold fs-5"
+                      value="{{ user.clearance_date|default:'2000-12-24'|date:'Y-m-d' }}"
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <!-- Purpose -->
+                <div class="row mb-3">
+                  <div class="col-md-8">
+                    <label
+                      for="clearance-purpose"
+                      class="form-label fw-semibold"
+                      >Purpose: <span class="text-danger">*</span></label
+                    >
+                    <select
+                      id="clearance-purpose"
+                      class="form-control-plaintext text-secondary fw-bold fs-5"
+                      disabled
+                    >
+                      <option value="{{ selected_purpose }}" selected>
+                        {{ selected_purpose|title|default:"Graduation" }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Signatories -->
+              <div class="mb-1">
+                <h6 class="text-white p-2 mb-3 modal-sub-header">
+                  <i class="bi bi-people me-2"></i>Signatories
+                </h6>
+                <!-- Signatories List with Status -->
+                <div class="row">
+                  <div class="col-md-6">
+                    <ul class="list-group">
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-center"
+                      >
+                        Dorm Supervisor
+                        <span class="badge bg-warning text-dark">Pending</span>
+                      </li>
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-center"
+                      >
+                        Canteen Concessionaire
+                        <span class="badge bg-warning text-dark">Pending</span>
+                      </li>
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-center"
+                      >
+                        Director of Library & Information
+                        <span class="badge bg-warning text-dark">Pending</span>
+                      </li>
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-center"
+                      >
+                        Director of Scholarship
+                        <span class="badge bg-warning text-dark">Pending</span>
+                      </li>
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-center"
+                      >
+                        Information Technology
+                        <span class="badge bg-warning text-dark">Pending</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <ul class="list-group">
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-center"
+                      >
+                        Dean of Student Affairs
+                        <span class="badge bg-warning text-dark">Pending</span>
+                      </li>
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-center"
+                      >
+                        Cashier
+                        <span class="badge bg-success text-dark">Approved</span>
+                      </li>
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-center"
+                      >
+                        Business Manager
+                        <span class="badge bg-warning text-dark">Pending</span>
+                      </li>
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-center"
+                      >
+                        Registrar
+                        <span class="badge bg-danger text-white">Disapproved</span>
+                      </li>
+                      <li
+                        class="list-group-item d-flex justify-content-between align-items-center"
+                      >
+                        Academic Dean
+                        <span class="badge bg-warning text-dark">Pending</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <!-- FORM END -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

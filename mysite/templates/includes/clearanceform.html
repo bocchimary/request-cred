@@ -1,0 +1,260 @@
+{% load static %}
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="clearanceModal"
+  tabindex="-1"
+  aria-labelledby="clearanceModalLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+  >
+    <div class="modal-content">
+      <div class="modal-header text-white pb-1">
+        <h5 id="clearanceModalLabel">
+          <i class="bi bi-file-earmark-check"></i> Clearance Form
+        </h5>
+      </div>
+      <div class="modal-body">
+        <!-- FORM START -->
+        <form id="clearanceForm" method="POST" action="/clearance/" novalidate>
+          {% csrf_token %}
+
+          <!-- Personal Information Section -->
+          <div class="mb-4">
+            <div class="row mb-3">
+              <label for="clearance-firstname" class="form-label fw-semibold"
+                >Full Name: <span class="text-danger">*</span></label
+              >
+              <div class="col-md-3">
+                <input
+                  type="text"
+                  name="clearance-firstname"
+                  id="clearance-firstname"
+                  class="form-control"
+                  required
+                  placeholder="First Name"
+                />
+                <div class="invalid-feedback">
+                  Please enter your first name.
+                </div>
+              </div>
+              <div class="col-md-3">
+                <input
+                  type="text"
+                  name="clearance-middlename"
+                  id="clearance-middlename"
+                  class="form-control"
+                  required
+                  placeholder="Middle Name"
+                />
+                <div class="invalid-feedback">
+                  Please enter your middle name.
+                </div>
+              </div>
+              <div class="col-md-3">
+                <input
+                  type="text"
+                  name="clearance-lastname"
+                  id="clearance-lastname"
+                  class="form-control"
+                  required
+                  placeholder="Last Name"
+                />
+                <div class="invalid-feedback">Please enter your last name.</div>
+              </div>
+              <div class="col-md-3">
+                <input
+                  type="text"
+                  name="clearance-suffix"
+                  id="clearance-suffix"
+                  class="form-control"
+                  placeholder="Suffix (Optional)"
+                />
+              </div>
+            </div>
+
+            <!-- Year, Section, ID -->
+            <div class="row mb-3">
+              <div class="col-md-4">
+                <label for="clearance-year" class="form-label fw-semibold"
+                  >Year: <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  name="clearance-year"
+                  id="clearance-year"
+                  class="form-control"
+                  required
+                  placeholder="Year"
+                />
+                <div class="invalid-feedback">Please enter your year.</div>
+              </div>
+              <div class="col-md-4">
+                <label for="clearance-section" class="form-label fw-semibold"
+                  >Section: <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  name="clearance-section"
+                  id="clearance-section"
+                  class="form-control"
+                  required
+                  placeholder="Section"
+                />
+                <div class="invalid-feedback">Please enter your section.</div>
+              </div>
+              <div class="col-md-4">
+                <label for="clearance-idnum" class="form-label fw-semibold"
+                  >ID Number: <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  name="clearance-idnum"
+                  id="clearance-idnum"
+                  class="form-control"
+                  required
+                  placeholder="ID Number"
+                />
+                <div class="invalid-feedback">Please enter your ID number.</div>
+              </div>
+            </div>
+
+            <!-- Course and Date -->
+            <div class="row mb-3">
+              <div class="col-md-7">
+                <label for="clearance-course" class="form-label fw-semibold"
+                  >Course: <span class="text-danger">*</span></label
+                >
+                <select
+                  name="clearance-course"
+                  id="clearance-course"
+                  class="form-select"
+                  required
+                >
+                  <option selected disabled value="">Select Course</option>
+                  <option value="ABTh">Bachelor of Arts in Theology</option>
+                  <option value="BTh">Bachelor of Theology</option>
+                  <option value="BSED-VE">
+                    Bachelor of Secondary Education Major in Values Education
+                  </option>
+                  <option value="BEED">Bachelor of Elementary Education</option>
+                  <option value="MDivBS">
+                    Master of Divinity - Biblical Studies
+                  </option>
+                  <option value="MDivPS">
+                    Master of Divinity - Pastoral Studies
+                  </option>
+                  <option value="MABC">
+                    Master of Arts in Biblical Counseling
+                  </option>
+                  <option value="MABE">
+                    Master of Arts in Biblical Exposition
+                  </option>
+                  <option value="MAM">Master of Arts in Ministry</option>
+                  <option value="MABS">
+                    Master of Arts in Biblical Studies
+                  </option>
+                  <option value="MAICS">
+                    Master of Arts in Intercultural Studies
+                  </option>
+                  <option value="MACE">
+                    Master of Arts in Christian Education
+                  </option>
+                </select>
+                <div class="invalid-feedback">Please select your course.</div>
+              </div>
+              <div class="col-md-5">
+                <label for="clearance-date" class="form-label fw-semibold"
+                  >Date: <span class="text-danger">*</span></label
+                >
+                <input
+                  type="date"
+                  name="clearance-date"
+                  id="clearance-date"
+                  class="form-control"
+                  required
+                />
+                <div class="invalid-feedback">Please enter the date.</div>
+              </div>
+            </div>
+
+            <!-- Purpose -->
+            <div class="row mb-3">
+              <div class="col-md-8">
+                <label for="clearance-purpose" class="form-label fw-semibold"
+                  >Purpose: <span class="text-danger">*</span></label
+                >
+                <select
+                  name="clearance-purpose"
+                  id="clearance-purpose"
+                  class="form-select"
+                  required
+                >
+                  <option value="" selected disabled>Select:</option>
+                  <option value="clearance-request">Request Document</option>
+                  <option value="clearance-enrollment">Enrollment</option>
+                  <option value="clearance-graduation">Graduation</option>
+                </select>
+                <div class="invalid-feedback">Please select a purpose.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Signatories -->
+          <div class="mb-4">
+            <h6 class="text-white p-2 mb-3 modal-sub-header">
+              <i class="bi bi-people me-2"></i>Signatories
+            </h6>
+            <!-- Signatories table -->
+            <div class="row">
+              <div class="col-md-6">
+                <ul class="list-group mb-2">
+                  <li class="list-group-item">Dorm Supervisor</li>
+                  <li class="list-group-item">Canteen Concessionaire</li>
+                  <li class="list-group-item">
+                    Director of Library & Information
+                  </li>
+                  <li class="list-group-item">Director of Scholarship</li>
+                  <li class="list-group-item">Information Technology</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul class="list-group mb-2">
+                  <li class="list-group-item">Dean of Student Affairs</li>
+                  <li class="list-group-item">Cashier</li>
+                  <li class="list-group-item">Business Manager</li>
+                  <li class="list-group-item">Registrar</li>
+                  <li class="list-group-item">Academic Dean</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-info" role="alert">
+            <i class="bi bi-clock me-2"></i>
+            <strong>Office Hours Notice:</strong> The Office of the Registrar
+            processes forms on weekdays from 8:00 AM to 4:00 PM. Requests
+            submitted outside these hours will be processed on the next business
+            day.
+          </div>
+
+          <div class="d-flex justify-content-end gap-2 mt-4">
+            <button
+              class="btn btn-secondary"
+              type="button"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button class="btn text-white btn-submit" type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
+        <!-- FORM END -->
+      </div>
+    </div>
+  </div>
+</div>

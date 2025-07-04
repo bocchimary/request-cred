@@ -10,6 +10,7 @@ def otp(request):
 #trial page
 def trial(request):
      return render(request,'trial.html')
+
 #student dashboard
 def students(request):
      return render(request,'students.html')
