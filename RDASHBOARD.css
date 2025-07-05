@@ -225,6 +225,12 @@ body {
     height: 300px;
     border: 0;
   }
+
+  .registrar_dashboard_scrollable_events {
+    max-height: 200px; /* adjust as needed */
+    overflow-y: auto;
+    padding-right: 5px;
+  }
   
   /* Responsive */
   @media (max-width: 768px) {
