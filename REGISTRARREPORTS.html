@@ -97,7 +97,7 @@
         </div>
         <div class="ms-auto">
           <label class="form-label invisible d-block">List</label>
-          <button class="btn btn-secondary" id="registrar_generate_report_listButton" onclick="registrar_generate_report_toggleGeneratedReportsPanel()">
+          <button type="button" class="btn btn-secondary" id="registrar_generate_report_listButton" onclick="registrar_generate_report_toggleGeneratedReportsPanel()">
             List of Generated Reports
           </button>
         </div>
@@ -145,11 +145,11 @@
       </div>
     
       <div class="d-flex justify-content-end mt-4">
-        <button class="btn btn-primary" id="registrar_generate_report_generateButton" onclick="registrar_generate_report_generateReport()">Generate Report</button>
+        <button type="button" class="btn btn-primary" id="registrar_generate_report_generateButton" onclick="registrar_generate_report_generateReport()">Generate Report</button>
       </div>
     
       <div class="generated-report-panel" id="registrar_generate_report_generatedPanel">
-        <button class="btn-close m-3" onclick="registrar_generate_report_toggleGeneratedReportsPanel()" id="registrar_generate_report_closePanel"></button>
+        <button type="button" class="btn-close m-3" onclick="registrar_generate_report_toggleGeneratedReportsPanel()" id="registrar_generate_report_closePanel"></button>
         <div class="p-4" id="registrar_generate_report_panelContent">
           <h5 class="fw-bold mb-3">Generated Reports</h5>
           <ul class="list-group" id="registrar_generate_report_listGroup">
