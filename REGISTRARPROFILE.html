@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>REGISTRAR PROFILE</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="RPROFILE.css">
+
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="registrar_sidebar" id="registrar_sidebar">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+      <span class="fw-bold fs-5 registrar_sidebar-title">My Sidebar</span>
+      <button class="registrar_sidebar_toggle-button d-md-none" onclick="toggleSidebar()" id="registrar_sidebar_toggleBtn">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <button class="registrar_sidebar_desktopToggle-button d-none d-md-block" onclick="toggleSidebar()" id="registrar_sidebar_desktopToggleBtn">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+    <a href="REGISTRARDASHBOARD.html"><i class="bi bi-speedometer2"></i><span class="registrar_sidebar_link-text">Dashboard</span></a>
+    <a href="REGISTRARCLEARANCE.html"><i class="bi bi-card-checklist"></i><span class="registrar_sidebar_link-text">Clearance</span></a>
+    <a href="REGISTRARENROLLMENT.html"><i class="bi bi-clipboard2-minus"></i><span class="registrar_sidebar_link-text">Enrollment</span></a>
+    <a href="REGISTRARGRADUATION.html"><i class="bi bi-mortarboard"></i><span class="registrar_sidebar_link-text">Graduation</span></a>
+    <a href="REGISTRARDOCUMENTRELEASE.html"><i class="bi bi-file-earmark-check"></i><span class="registrar_sidebar_link-text">Document Release</span></a>
+    <a href="REGISTRARREPORTS.html"><i class="bi bi-table"></i><span class="registrar_sidebar_link-text">Reports</span></a>
+    <a href="REGISTRARUSERMANAGEMENT.html"><i class="bi bi-people"></i><span class="registrar_sidebar_link-text">User Management</span></a>
+    <a href="REGISTRARPROFILE.html"><i class="bi bi-person"></i><span class="registrar_sidebar_link-text">Profile</span></a>
+    <a href="REGISTRARMESSAGES.html"><i class="bi bi-chat-dots"></i><span class="registrar_sidebar_link-text">Messages</span></a>
+    <a href="#"><i class="bi bi-box-arrow-right"></i><span class="registrar_sidebar_link-text">Logout</span></a>
+  </div>
+
+  <!-- Backdrop for mobile -->
+  <div id="registrar_sidebar_sidebarBackdrop" onclick="toggleSidebar()"></div>
+
+  <!-- Top Bar -->
+  <div class="registrar_sidebar_top-bar d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-2">
+      <button class="registrar_sidebar_topbarToggle-button d-md-none" onclick="toggleSidebar()" id="registrar_sidebar_topbarToggleBtn">
+        <i class="bi bi-list"></i>
+      </button>
+      <span class="fw-bold registrar_sidebar_system-title d-flex align-items-center gap-2">
+        <img src="IMAGES/ptslogo.png" alt="ptslogo.png" class="registrar_sidebar_logo-img">
+        PTS College & Advanced Studies
+      </span>
+    </div>
+
+    <div class="d-flex align-items-center gap-3">
+      <div class="position-relative" id="registrar_sidebar_notification">
+        <i class="bi bi-bell-fill fs-5 text-white" style="cursor: pointer;"></i>
+        <span id="registrar_sidebar_notification_count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">4</span>
+      </div>
+
+      <div class="fw-bold registrar_sidebar_user-info d-flex align-items-center gap-2 text-white">
+        <i class="bi bi-person-circle fs-4"></i>
+        <span>Name of the user</span>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="registrar_profile_main-content" id="registrar_profile_main_content">
+    <form id="registrar_profile_form">
+      <div class="text-end text-muted mb-2 small">
+        <strong>Date:</strong> <span id="registrar_profile_dateToday"></span>
+      </div>
+      
+    
+      <form id="registrar_profile_form">
+        <div class="row g-4">
+          <!-- Left Column -->
+          <div class="col-lg-4 col-md-12">
+            <div class="card">
+              <div class="tab-header">Profile Picture</div>
+              <div class="card-body text-center">
+                <div class="profile-box mx-auto mb-3">
+                  <img src="https://via.placeholder.com/150" class="profile-img" alt="Profile Photo" id="registrar_profile_image">
+                </div>
+    
+                <button class="btn btn-outline-secondary w-80 mb-4" type="button" id="registrar_profile_upload_btn">Upload new image</button>
+    
+                <hr>
+                <h6 class="mb-3">Change Password</h6>
+                <div class="mb-3 text-start">
+                  <label for="registrar_profile_oldPassword" class="form-label">Old Password</label>
+                  <input type="password" class="form-control" id="registrar_profile_oldPassword" name="oldPassword">
+                </div>
+                <div class="mb-3 text-start">
+                  <label for="registrar_profile_newPassword" class="form-label">New Password</label>
+                  <input type="password" class="form-control" id="registrar_profile_newPassword" name="newPassword">
+                </div>
+                <button class="btn btn-primary w-80" type="submit" name="changePassword" id="registrar_profile_changePassword_btn">Change Password</button>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Right Column -->
+          <div class="col-lg-8 col-md-12">
+            <div class="card">
+              <div class="tab-header">Account Details</div>
+              <div class="card-body">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="registrar_profile_firstName" class="form-label">First name</label>
+                    <input type="text" class="form-control" name="firstName" id="registrar_profile_firstName" placeholder="First name">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="registrar_profile_lastName" class="form-label">Last name</label>
+                    <input type="text" class="form-control" name="lastName" id="registrar_profile_lastName" placeholder="Last name">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="registrar_profile_birthday" class="form-label">Birthday</label>
+                    <input type="date" class="form-control" name="birthday" id="registrar_profile_birthday">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="registrar_profile_sex" class="form-label">Sex</label>
+                    <input type="text" class="form-control" name="sex" id="registrar_profile_sex" placeholder="Sex">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="registrar_profile_position" class="form-label">Position</label>
+                    <input type="text" class="form-control" name="position" id="registrar_profile_position" placeholder="Position">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="registrar_profile_department" class="form-label">Department</label>
+                    <input type="text" class="form-control" name="department" id="registrar_profile_department" placeholder="Department">
+                  </div>
+                </div>
+    
+                <hr class="my-4" />
+    
+                <!-- Contact Info Section -->
+                <h6 class="mb-3">Contact Info</h6>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="registrar_profile_email" class="form-label">Email (required)</label>
+                    <input type="email" class="form-control" name="email" id="registrar_profile_email" value="gene.rodrig@gmail.com">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="registrar_profile_contactNumber" class="form-label">Contact Number</label>
+                    <input type="text" class="form-control" name="contactNumber" id="registrar_profile_contactNumber" value="09123456789">
+                  </div>
+                </div>
+    
+                <div class="mt-4 text-end">
+                  <button class="btn btn-primary" type="submit" name="saveProfile" id="registrar_profile_save_btn">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </form>
+  </div>
+  
+ 
+ 
+  <script src="RPROFILE.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+</body>
+</html>

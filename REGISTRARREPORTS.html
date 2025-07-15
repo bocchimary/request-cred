@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>REGISTRAR GENERATE REPORT</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="RREPORTS.css">
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <div class="registrar_sidebar" id="registrar_sidebar">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+      <span class="fw-bold fs-5 registrar_sidebar-title">My Sidebar</span>
+      <button class="registrar_sidebar_toggle-button d-md-none" onclick="toggleSidebar()" id="registrar_sidebar_toggleBtn">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <button class="registrar_sidebar_desktopToggle-button d-none d-md-block" onclick="toggleSidebar()" id="registrar_sidebar_desktopToggleBtn">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+    <a href="REGISTRARDASHBOARD.html"><i class="bi bi-speedometer2"></i><span class="registrar_sidebar_link-text">Dashboard</span></a>
+    <a href="REGISTRARCLEARANCE.html"><i class="bi bi-card-checklist"></i><span class="registrar_sidebar_link-text">Clearance</span></a>
+    <a href="REGISTRARENROLLMENT.html"><i class="bi bi-clipboard2-minus"></i><span class="registrar_sidebar_link-text">Enrollment</span></a>
+    <a href="REGISTRARGRADUATION.html"><i class="bi bi-mortarboard"></i><span class="registrar_sidebar_link-text">Graduation</span></a>
+    <a href="REGISTRARDOCUMENTRELEASE.html"><i class="bi bi-file-earmark-check"></i><span class="registrar_sidebar_link-text">Document Release</span></a>
+    <a href="REGISTRARREPORTS.html"><i class="bi bi-table"></i><span class="registrar_sidebar_link-text">Reports</span></a>
+    <a href="REGISTRARUSERMANAGEMENT.html"><i class="bi bi-people"></i><span class="registrar_sidebar_link-text">User Management</span></a>
+    <a href="REGISTRARPROFILE.html"><i class="bi bi-person"></i><span class="registrar_sidebar_link-text">Profile</span></a>
+    <a href="REGISTRARMESSAGES.html"><i class="bi bi-chat-dots"></i><span class="registrar_sidebar_link-text">Messages</span></a>
+    <a href="#"><i class="bi bi-box-arrow-right"></i><span class="registrar_sidebar_link-text">Logout</span></a>
+  </div>
+
+  <!-- Backdrop for mobile -->
+  <div id="registrar_sidebar_sidebarBackdrop" onclick="toggleSidebar()"></div>
+
+  <!-- Top Bar -->
+  <div class="registrar_sidebar_top-bar d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-2">
+      <button class="registrar_sidebar_topbarToggle-button d-md-none" onclick="toggleSidebar()" id="registrar_sidebar_topbarToggleBtn">
+        <i class="bi bi-list"></i>
+      </button>
+      <span class="fw-bold registrar_sidebar_system-title d-flex align-items-center gap-2">
+        <img src="IMAGES/ptslogo.png" alt="ptslogo.png" class="registrar_sidebar_logo-img">
+        PTS College & Advanced Studies
+      </span>
+    </div>
+
+    <div class="d-flex align-items-center gap-3">
+      <div class="position-relative" id="registrar_sidebar_notification">
+        <i class="bi bi-bell-fill fs-5 text-white" style="cursor: pointer;"></i>
+        <span id="registrar_sidebar_notification_count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">4</span>
+      </div>
+
+      <div class="fw-bold registrar_sidebar_user-info d-flex align-items-center gap-2 text-white">
+        <i class="bi bi-person-circle fs-4"></i>
+        <span>Name of the user</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="registrar_generate_report_main-content" id="registrar_generate_report_mainContent">
+    <form id="registrar_generate_report_form">
+      <div class="text-end text-muted mb-2 small">
+        <strong>Date:</strong>
+        <span id="registrar_generate_report_dateToday"></span>
+      </div>
+      <h1 class="fw-bold" id="registrar_generate_report_title">Generate Reports</h1>
+    
+      <div class="d-flex flex-wrap gap-3 mb-3 align-items-end" id="registrar_generate_report_filters">
+        <div>
+          <label class="form-label" for="registrar_generate_report_fromDate">From Date</label>
+          <input type="date" class="form-control" id="registrar_generate_report_fromDate">
+        </div>
+        <div>
+          <label class="form-label" for="registrar_generate_report_toDate">To Date</label>
+          <input type="date" class="form-control" id="registrar_generate_report_toDate">
+        </div>
+        <div>
+          <label class="form-label" for="registrar_generate_report_formStatus">Form Status</label>
+          <select class="form-select" id="registrar_generate_report_formStatus">
+            <option>Approved Forms</option>
+            <option>Released Forms</option>
+            <option>Declined Forms</option>
+            <option>Pending Forms</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label" for="registrar_generate_report_periodType">Period</label>
+          <select class="form-select" id="registrar_generate_report_periodType">
+            <option>Week</option>
+            <option>Day</option>
+          </select>
+        </div>
+        <div class="ms-auto">
+          <label class="form-label invisible d-block">List</label>
+          <button type="button" class="btn btn-secondary" id="registrar_generate_report_listButton" onclick="registrar_generate_report_toggleGeneratedReportsPanel()">
+            List of Generated Reports
+          </button>
+        </div>
+      </div>
+    
+      <div class="registrar_generate_report_table-fixed-container">
+        <div class="registrar_generate_report_table-scroll-wrapper">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered align-middle mb-0" id="registrar_generate_report_table">
+              <thead class="bg-primary text-white text-center" id="registrar_generate_report_tableHead">
+                <tr>
+                  <th>Student</th>
+                  <th>Course</th>
+                  <th>Requested Form</th>
+                  <th>Status</th>
+                  <th>Signatory</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody class="text-center" id="registrar_generate_report_tableBody">
+                <tr>
+                  <td id="registrar_generate_report_student_name">John Doe</td>
+                  <td id="registrar_generate_report_student_course">BSIT</td>
+                  <td id="registrar_generate_report_requested_form">TOR</td>
+                  <td id="registrar_generate_report_form_status">Approved</td>
+                  <td id="registrar_generate_report_signatory">Registrar</td>
+                  <td id="registrar_generate_report_date">2025-06-27</td>
+                  <td id="registrar_generate_report_time">10:00 AM</td>
+                </tr>
+                
+                <tr>
+                  <td>Jane Smith</td>
+                  <td>BSA</td>
+                  <td>Diploma</td>
+                  <td>Pending</td>
+                  <td>Dean</td>
+                  <td>2025-06-26</td>
+                  <td>01:30 PM</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    
+      <div class="d-flex justify-content-end mt-4">
+        <button type="button" class="btn btn-primary" id="registrar_generate_report_generateButton" onclick="registrar_generate_report_generateReport()">Generate Report</button>
+      </div>
+    
+      <div class="generated-report-panel" id="registrar_generate_report_generatedPanel">
+        <button type="button" class="btn-close m-3" onclick="registrar_generate_report_toggleGeneratedReportsPanel()" id="registrar_generate_report_closePanel"></button>
+        <div class="p-4" id="registrar_generate_report_panelContent">
+          <h5 class="fw-bold mb-3">Generated Reports</h5>
+          <ul class="list-group" id="registrar_generate_report_listGroup">
+            <li class="list-group-item">June 27 - Approved Forms - Weekly</li>
+            <li class="list-group-item">June 25 - Pending Forms - Daily</li>
+            <li class="list-group-item">June 20 - Declined Forms - Weekly</li>
+          </ul>
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  
+  <!-- Scripts -->
+  <script src="RREPORTS.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

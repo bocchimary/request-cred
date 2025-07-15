@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>REGISTRAR USER MANAGEMENT</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="RUSERMANAGEMENT.css">
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <div class="registrar_sidebar" id="registrar_sidebar">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+      <span class="fw-bold fs-5 registrar_sidebar-title">My Sidebar</span>
+      <button class="registrar_sidebar_toggle-button d-md-none" onclick="toggleSidebar()" id="registrar_sidebar_toggleBtn">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <button class="registrar_sidebar_desktopToggle-button d-none d-md-block" onclick="toggleSidebar()" id="registrar_sidebar_desktopToggleBtn">
+        <i class="bi bi-list"></i>
+      </button>
+    </div>
+    <a href="REGISTRARDASHBOARD.html"><i class="bi bi-speedometer2"></i><span class="registrar_sidebar_link-text">Dashboard</span></a>
+    <a href="REGISTRARCLEARANCE.html"><i class="bi bi-card-checklist"></i><span class="registrar_sidebar_link-text">Clearance</span></a>
+    <a href="REGISTRARENROLLMENT.html"><i class="bi bi-clipboard2-minus"></i><span class="registrar_sidebar_link-text">Enrollment</span></a>
+    <a href="REGISTRARGRADUATION.html"><i class="bi bi-mortarboard"></i><span class="registrar_sidebar_link-text">Graduation</span></a>
+    <a href="REGISTRARDOCUMENTRELEASE.html"><i class="bi bi-file-earmark-check"></i><span class="registrar_sidebar_link-text">Document Release</span></a>
+    <a href="REGISTRARREPORTS.html"><i class="bi bi-table"></i><span class="registrar_sidebar_link-text">Reports</span></a>
+    <a href="REGISTRARUSERMANAGEMENT.html"><i class="bi bi-people"></i><span class="registrar_sidebar_link-text">User Management</span></a>
+    <a href="REGISTRARPROFILE.html"><i class="bi bi-person"></i><span class="registrar_sidebar_link-text">Profile</span></a>
+    <a href="REGISTRARMESSAGES.html"><i class="bi bi-chat-dots"></i><span class="registrar_sidebar_link-text">Messages</span></a>
+    <a href="#"><i class="bi bi-box-arrow-right"></i><span class="registrar_sidebar_link-text">Logout</span></a>
+  </div>
+
+  <!-- Backdrop for mobile -->
+  <div id="registrar_sidebar_sidebarBackdrop" onclick="toggleSidebar()"></div>
+
+  <!-- Top Bar -->
+  <div class="registrar_sidebar_top-bar d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-2">
+      <button class="registrar_sidebar_topbarToggle-button d-md-none" onclick="toggleSidebar()" id="registrar_sidebar_topbarToggleBtn">
+        <i class="bi bi-list"></i>
+      </button>
+      <span class="fw-bold registrar_sidebar_system-title d-flex align-items-center gap-2">
+        <img src="IMAGES/ptslogo.png" alt="ptslogo.png" class="registrar_sidebar_logo-img">
+        PTS College & Advanced Studies
+      </span>
+    </div>
+
+    <div class="d-flex align-items-center gap-3">
+      <div class="position-relative" id="registrar_sidebar_notification">
+        <i class="bi bi-bell-fill fs-5 text-white" style="cursor: pointer;"></i>
+        <span id="registrar_sidebar_notification_count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">4</span>
+      </div>
+
+      <div class="fw-bold registrar_sidebar_user-info d-flex align-items-center gap-2 text-white">
+        <i class="bi bi-person-circle fs-4"></i>
+        <span>Name of the user</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="registrar_user_manager_main-content">
+    <form id="registrar_user_manager_form">
+      <div class="text-end text-muted mb-2 small"><strong>Date:</strong> <span id="registrar_user_manager_dateToday"></span></div>
+      <h1 class="fw-bold">User Management</h1>
+
+      <!-- Filter + Search Row -->
+      <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+          <select class="form-select form-select-sm" style="width: auto;" id="registrar_user_manager_course">
+            <option selected disabled>Filter by Course</option>
+            <option>BET-COET</option>
+            <option>AMTh</option>
+          </select>
+          <select class="form-select form-select-sm" style="width: auto;" id="registrar_user_manager_year">
+            <option selected disabled>Filter by Year</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+          <select class="form-select form-select-sm" style="width: auto;" id="registrar_user_manager_section">
+            <option selected disabled>Filter by Section</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+          </select>
+          <select class="form-select form-select-sm" style="width: auto;" id="registrar_user_manager_status">
+            <option selected disabled>Filter by Status</option>
+            <option>Cleared</option>
+            <option>Pending</option>
+            <option>Disapproved</option>
+          </select>
+    
+          <!-- Search input right next to filters -->
+          <div class="registrar_user_manager_search-bar input-group">
+            <input type="text" class="form-control" placeholder="Search" id="registrar_user_manager_search_input">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+          </div>
+
+          <div class="table-actions" id="registrar_user_manager_tableActions">
+            <button type="button" class="btn btn-primary add-user-btn" data-bs-toggle="modal" data-bs-target="#registrar_user_manager_addUserModal">
+              <i class="bi bi-person-plus-fill"></i> Add User
+            </button>
+          </div>
+      </div>
+
+      <div class="registrar_user_manager_table-fixed-container">
+        <div class="registrar_user_manager_table-scroll-wrapper">
+          <table class="table registrar_user_manager_table align-middle" id="registrar_user_manager_userTable">
+            <thead>
+              <tr>
+                <th>Full Name</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="user-row" id="registrar_user_manager_row_elly" onclick="showUser(
+                'Elly Soyer', 
+                'elly.soyer@example.com', 
+                'Active', 
+                'https://via.placeholder.com/120',
+                'Admin',
+                'May 12, 2025 08:30 AM',
+                '+63 912 345 6789',
+                'Manila, Philippines',
+                'Handles user approvals and account issues.',
+                'IT Department'
+              )">
+                <td id="registrar_user_manager_name_elly">Elly Soyer</td>
+                <td id="registrar_user_manager_role_elly">Admin</td>
+                <td id="registrar_user_manager_status_elly"><span class="user-status active-status">Active</span></td>
+                <td id="registrar_user_manager_email_elly">elly.soyer@example.com</td>
+              </tr>
+
+              <tr class="user-row" id="registrar_user_manager_row_august" onclick="showUser(
+                'August Dvorak',
+                'dvorak.august@gmail.com',
+                'Not active',
+                'https://via.placeholder.com/120',
+                'Student',
+                'Apr 21, 2025 04:12 PM',
+                '+63 998 765 4321',
+                'Cebu City',
+                'Temporarily inactive due to leave.',
+                '',
+                'BSIT',
+                '3rd Year',
+                'Section B'
+              )">
+                <td id="registrar_user_manager_name_august">August Dvorak</td>
+                <td id="registrar_user_manager_role_august">Student</td>
+                <td id="registrar_user_manager_status_august"><span class="user-status inactive-status">Not active</span></td>
+                <td id="registrar_user_manager_email_august">dvorak.august@gmail.com</td>
+              </tr>
+
+            </tbody>
+          </table>
+      
+          <!-- Admin Panel -->
+          <div class="user-panel" id="registrar_user_manager_adminPanel">
+            <button type="button" class="btn-close" onclick="hideUser()"></button>
+            <div class="text-center mt-4">
+              <img src="" alt="Profile" class="user-img mb-3" id="registrar_user_manager_adminImg">
+              <h5 id="registrar_user_manager_adminName">Name</h5>
+              <p class="text-muted mb-1"><i class="bi bi-envelope"></i> <span id="registrar_user_manager_adminEmail"></span></p>
+              <p><span id="registrar_user_manager_adminStatus" class="user-status"></span></p>
+            </div>
+            <hr>
+            <div class="px-3">
+              <p><strong>Role:</strong> <span id="registrar_user_manager_adminRole">-</span></p>
+              <p><strong>Department:</strong> <span id="registrar_user_manager_adminDepartment">-</span></p>
+              <p><strong>Last Login:</strong> <span id="registrar_user_manager_adminLastLogin">-</span></p>
+              <p><strong>Phone:</strong> <span id="registrar_user_manager_adminPhone">-</span></p>
+              <p><strong>Email:</strong> <span id="registrar_user_manager_adminEmailDetail">-</span></p>
+              <p><strong>Address:</strong> <span id="registrar_user_manager_adminAddress">-</span></p>
+              <div class="bg-light p-3 rounded mt-3">
+                <p class="mb-1"><strong>Notes:</strong></p>
+                <p id="registrar_user_manager_adminNotes" class="mb-0 small">-</p>
+              </div>
+              <div class="text-center mt-4">
+                <button type="button" class="btn btn-outline-danger w-100" onclick="deleteUser()">Delete User</button>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Student Panel -->
+          <div class="user-panel" id="registrar_user_manager_studentPanel">
+            <button type="button" class="btn-close" onclick="hideUser()"></button>
+            <div class="text-center mt-4">
+              <img src="" alt="Profile" class="user-img mb-3" id="registrar_user_manager_studentImg">
+              <h5 id="registrar_user_manager_studentName">Name</h5>
+              <p class="text-muted mb-1"><i class="bi bi-envelope"></i> <span id="registrar_user_manager_studentEmail"></span></p>
+              <p><span id="registrar_user_manager_studentStatus" class="user-status"></span></p>
+            </div>
+            <hr>
+            <div class="px-3">
+              <p><strong>Role:</strong> <span id="registrar_user_manager_studentRole">-</span></p>
+              <p><strong>Course:</strong> <span id="registrar_user_manager_studentCourse">-</span></p>
+              <p><strong>Year:</strong> <span id="registrar_user_manager_studentYear">-</span></p>
+              <p><strong>Section:</strong> <span id="registrar_user_manager_studentSection">-</span></p>
+              <p><strong>Last Login:</strong> <span id="registrar_user_manager_studentLastLogin">-</span></p>
+              <p><strong>Phone:</strong> <span id="registrar_user_manager_studentPhone">-</span></p>
+              <p><strong>Email:</strong> <span id="registrar_user_manager_studentEmailDetail">-</span></p>
+              <p><strong>Address:</strong> <span id="registrar_user_manager_studentAddress">-</span></p>
+              <div class="bg-light p-3 rounded mt-3">
+                <p class="mb-1"><strong>Notes:</strong></p>
+                <p id="registrar_user_manager_studentNotes" class="mb-0 small">-</p>
+              </div>
+              <div class="text-center mt-4">
+                <button type="button" class="btn btn-outline-danger w-100" onclick="deleteUser()">Delete User</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      
+        <!-- Add User Modal -->
+        <div class="modal fade" id="registrar_user_manager_addUserModal" tabindex="-1" aria-labelledby="registrar_user_manager_addUserModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="registrar_user_manager_addUserModalLabel">Add New User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body bg-light">
+                <form>
+                  <!-- Section: Personal Info -->
+                  <h6 class="mt-3 mb-2">Personal Information</h6>
+                  <div class="row mb-3">
+                    <div class="col-md-3">
+                      <label class="form-label">Last Name</label>
+                      <input type="text" class="form-control" id="registrar_user_manager_lastName">
+                    </div>
+                    <div class="col-md-3">
+                      <label class="form-label">First Name</label>
+                      <input type="text" class="form-control" id="registrar_user_manager_firstName">
+                    </div>
+                    <div class="col-md-3">
+                      <label class="form-label">Middle Name</label>
+                      <input type="text" class="form-control" id="registrar_user_manager_middleName">
+                    </div>
+                    <div class="col-md-3">
+                      <label class="form-label">Suffix</label>
+                      <input type="text" class="form-control" id="registrar_user_manager_suffix">
+                    </div>
+                  </div>
+      
+                  <div class="row mb-3">
+                    <div class="col-md-4">
+                      <label class="form-label">Birth Date</label>
+                      <input type="date" class="form-control" id="registrar_user_manager_birthDate">
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label">Sex</label>
+                      <select class="form-select" id="registrar_user_manager_sex">
+                        <option selected disabled>Select</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                      </select>
+                    </div>
+                  </div>
+      
+                  <!-- Section: Contact Info -->
+                  <h6 class="mt-4 mb-2">Contact Details</h6>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label class="form-label">Contact Number</label>
+                      <input type="text" class="form-control" id="registrar_user_manager_contactNumber">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Email</label>
+                      <input type="email" class="form-control" id="registrar_user_manager_email">
+                    </div>
+                  </div>
+      
+                  <!-- Section: Work Info -->
+                  <h6 class="mt-4 mb-2">Work Information</h6>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label class="form-label">Position</label>
+                      <select class="form-select" id="registrar_user_manager_position">
+                        <option selected disabled>Select Position</option>
+                        <option>ARBOLAN</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Employee ID</label>
+                      <input type="text" class="form-control" id="registrar_user_manager_employeeID">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Department</label>
+                      <select class="form-select" id="registrar_user_manager_department">
+                        <option selected disabled>Select Department</option>
+                        <option>ARBOLAN</option>
+                      </select>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="registrar_user_manager_saveBtn">Save</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="registrar_user_manager_cancelBtn">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <!-- Scripts -->
+  <script src="RUSERMANAGEMENT.js"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
