@@ -1,0 +1,203 @@
+body {
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #f1f1f198
+}
+
+
+
+.chat-container {
+    height: 77vh;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    border-radius: 15px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  }
+
+  .chat-sidebar {
+    width: 80px;
+    border-right: 1px solid #dee2e6;
+    background-color: #fff;
+    padding: 1rem 0.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .chat-sidebar {
+      width: 300px;
+      padding: 1rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .chat-sidebar {
+      width: 400px;
+    }
+  }
+
+  .chat-main {
+    flex: 1;
+    background-color: #f1f3f5;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .chat-header {
+    background-color: white;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .chat-body {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+  }
+
+  .chat-message {
+    margin-bottom: 1rem;
+    max-width: 70%;
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    display: inline-block;
+  }
+
+  .chat-message.sent {
+    background-color: #d1e7dd;
+    align-self: flex-end;
+  }
+
+  .chat-message.received {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+  }
+
+  .chat-footer {
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-top: 1px solid #dee2e6;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .chat-profile {
+    position: absolute; /* Changed from fixed */
+    top: 0;
+    right: -350px;
+    width: 350px;
+    height: 100%;
+    background-color: #fff;
+    border-left: 1px solid #dee2e6;
+    z-index: 10; /* Reduced z-index to only appear over chat container */
+    transition: right 0.3s ease;
+    padding: 1rem;
+  }
+  
+
+  .chat-profile.show {
+    right: 0;
+  }
+
+  .chat-profile .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: none;
+  }
+
+  
+
+  /* Responsive Fixes */
+  @media (max-width: 767.98px) {
+    .chat-sidebar {
+      width: 100%;
+    }
+
+    .chat-sidebar span {
+      display: inline !important;
+    }
+
+    .chat-sidebar .list-group-item {
+      justify-content: start !important;
+    }
+
+    .chat-main,
+    .chat-profile {
+      display: none;
+    }
+
+    .chat-main.show {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 999;
+      background-color: white;
+    }
+
+    .chat-profile.show {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 350px;
+      z-index: 1000;
+      background-color: white;
+      padding-top: 60px;
+    }
+
+    /* Hide back button only for below 768px */
+    .chat-header .btn-back {
+      display: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    /* Ensure name always visible */
+    .chat-sidebar span {
+      display: inline !important;
+    }
+
+    .chat-sidebar .list-group-item {
+      justify-content: start !important;
+    }
+  }
+
+@media (max-width: 768px) {
+.alumni_sidebar {
+    transform: translateX(-100%);
+    width: 250px;
+    left: 0;
+}
+
+.alumni_sidebar.show {
+    transform: translateX(0%);
+}
+
+.alumni_sidebar.collapsed {
+    transform: translateX(-100%) !important;
+}
+
+.alumni_messages_main-content {
+    margin-left: 0 !important;
+    padding-top: 6.1rem !important; /* enough to clear top-bar */
+}
+
+.alumni_sidebar_top-bar,
+.alumni_sidebar.collapsed ~ .alumni_sidebar_top-bar {
+    left: 0 !important;
+}
+
+.alumni_sidebar_top-bar .alumni_sidebar_system-title,
+.alumni_sidebar_top-bar .alumni_sidebar_user-info span {
+    display: none;
+}
+}

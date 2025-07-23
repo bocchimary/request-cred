@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graduation Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,800;1,800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+      }
+
+      .open-sans-title {
+        font-family: "Open Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 800;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+        font-size: 30px;
+        color: #003399;
+      }
+      .title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 14px;
+        color: rgb(0, 0, 0);
+        margin-top: -5px;
+        margin-bottom: 10px;
+      }
+      .subtitle {
+        margin-top: -15px;
+        text-align: center;
+        font-size: 12px;
+        color: #003399;
+        font-weight: bold;
+      }
+
+      .print-button {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease;
+      }
+
+      .print-button:hover {
+        background-color: #2980b9;
+      }
+
+      .print-button:active {
+        transform: translateY(1px);
+      }
+
+      @page {
+        margin: 0.25in;
+      }
+      @media print {
+        .print-button {
+          display: none;
+        }
+
+        body {
+          margin: 0.1in;
+        }
+        .watermark {
+          display: block !important;
+        }
+
+        .motto {
+          background-color: #003399; !important; /* ensure it applies in print */
+          color: #ffffff !important; /* optional: improve contrast for printing */
+          -webkit-print-color-adjust: exact; /* for Safari/Chrome */
+          print-color-adjust: exact; /* for Firefox */
+        }
+      }
+      .header {
+        display: flex;
+        justify-content: center;
+      }
+      .row-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .row-container-footer {
+        display: flex;
+        justify-content: space-between;
+      }
+      .row-item {
+        margin-right: 50px; /* adjust spacing as needed */
+      }
+      .row-item-name {
+        margin-right: 20px;
+      }
+      .row-item-default {
+        margin-right: 10px;
+      }
+
+      .row-item p {
+        margin: 0;
+      }
+      .row-line-1 {
+        display: inline-block;
+        border-bottom: 0.3px solid #000;
+        min-width: 75px;
+        height: 1em;
+        vertical-align: bottom;
+      }
+      .row-line {
+        display: inline-block;
+        border-bottom: 0.3px solid #000;
+        min-width: 200px;
+        height: 1em;
+        vertical-align: bottom;
+      }
+      .footer-line {
+        display: inline-block;
+        border-bottom: 0.3px solid #000;
+        min-width: 100px;
+        height: 1em;
+        vertical-align: bottom;
+      }
+      .name-line {
+        display: inline-block;
+        border-bottom: 1px solid #000;
+        width: 450px; /* adjust as needed */
+        height: 1em;
+        vertical-align: bottom;
+      }
+
+      .name-labels {
+        display: flex;
+        justify-content: space-between;
+        width: 450px; /* match the span above */
+        font-size: 0.9em;
+        margin-top: 2px;
+        margin-left: 30px;
+      }
+
+      .label {
+        text-align: center;
+        flex: 1;
+      }
+
+      .pts {
+        width: 100px;
+        height: 100px;
+        margin-right: 40px;
+      }
+      .text-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: -25px;
+      }
+      .info {
+        margin-top: -20px;
+      }
+      .motto {
+        font-family: "Segoe Script", cursive;
+        font-size: 16px;
+        color: #ffffff;
+        background-color: #003399;
+        width: 100%;
+        text-align: center;
+        margin-top: -5px;
+      }
+
+      .instruction {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+      .instruction,
+      .desc {
+        margin: 0;
+      }
+      .p-info {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+      .m-0 {
+        margin: 0;
+      }
+      .table-blank {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .table-blank th {
+        text-align: left;
+        padding: 8px 8px;
+        font-weight: bold;
+      }
+
+      .underline {
+        display: inline-block;
+        width: 90%;
+        border-bottom: 1px solid black;
+        height: 1.5em;
+      }
+      .form-content {
+        font-size: 13px;
+        margin-left: 0.5in;
+      }
+
+      .sign {
+        text-align: right;
+        margin-top: -10px;
+        margin-bottom: 10px;
+      }
+      .indented {
+        text-indent: 30px; /* adjust indent size */
+      }
+      
+    </style>
+  </head>
+
+  <body>
+    <button class="print-button" onclick="printPage()">Print PDF</button>
+    <div class="header">
+      <img
+        src="https://ptscas.edu.ph/wp-content/uploads/2019/09/logo-blue-1.png"
+        alt="ptslogo"
+        class="pts"
+      />
+      <!-- New column container -->
+      <div class="text-container">
+        <p class="open-sans-title">PTS COLLEGE & ADVANCED STUDIES</p>
+        <div class="info">
+          <p class="subtitle">
+            Carlos Trinidad Ave., Salitran IV, Dasmariñas City, 4114 Cavite,
+            Philippines
+          </p>
+          <p class="subtitle">
+            Contact Nos.: 0917 146 6759 (046) 476 0597 | Email:
+            info@ptscas.edu.ph
+          </p>
+          <p class="subtitle">
+            Website: ptscas.edu.ph • FB: facebook.com/ptscas
+          </p>
+        </div>
+      </div>
+    </div>
+    <p class="motto">Spirituality and Academic Excellence</p>
+
+    <div class="form-content">
+      <div class="title">APPLICATION FOR GRADUATION FORM</div>
+      <div class="row-container">
+        <div class="row-item">
+          <p>Date: <span class="row-line"></span></p>
+        </div>
+        <div class="row-item">
+          <p>
+            Application Number: <span class="row-line"></span>
+          </p>
+        </div>
+      </div>
+      <div class="instruction">INSTRUCTIONS:</div>
+      <p class="desc">1. Complete all information as requested.</p>
+      <p class="desc">2. Print all information legibly.</p>
+      <div class="p-info">PERSONAL INFORMATION:</div>
+      <div class="row-container">
+        <div class="row-item">
+          <p class="name">Name: <span class="name-line"></span></p>
+          <div class="name-labels">
+            <span class="label">(LAST NAME)</span>
+            <span class="label">(FIRST NAME)</span>
+            <span class="label">(MIDDLE NAME)</span>
+          </div>
+        </div>
+        <div class="row-item">
+          <p>Sex: <span class="row-line-1"></span></p>
+        </div>
+      </div>
+      <div class="row-container">
+        <div class="row-item">
+          <p>Date of Birth: <span class="row-line"></span></p>
+        </div>
+        <div class="row-item">
+          <p>Phone no. <span class="row-line"></span></p>
+        </div>
+      </div>
+      <p class="m-0">Place of Birth: <span class="name-line"></span></p>
+      <p class="m-0">Present Address: <span class="name-line"></span></p>
+      <p class="m-0">Permanent Address: <span class="name-line"></span></p>
+      <p class="m-0">Email Address: <span class="name-line"></span></p>
+      <div class="p-info">ACADEMIC INFORMATION:</div>
+      <p class="m-0">Degree/Program: <span class="name-line"></span></p>
+      <p class="m-0">Major (if applicable): <span class="name-line"></span></p>
+      <p class="m-0">
+        Thesis Title (if applicable): <span class="name-line"></span>
+      </p>
+      <p class="m-0">Subjects Currently Enrolled:</p>
+      <table class="table-blank">
+        <thead>
+          <tr>
+            <th>Course No.</th>
+            <th>Course Title</th>
+            <th>Units</th>
+            <th>Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+          </tr>
+          <tr>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+          </tr>
+          <tr>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+          </tr>
+          <tr>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+          </tr>
+          <tr>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+          </tr>
+          <tr>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+            <td><span class="underline"></span></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr style="border: none; border-top: 3px solid black; margin-top: 20px" />
+      <p class="desc indented">
+        I have the honor to apply for graduation in the course leading to the
+        degree of <span class="row-line"></span> Major in
+        <span class="footer-line"></span>this Graduation 20
+        <span class="row-line-1"></span> .
+      </p>
+      <p class="desc indented">
+        It is understood that I shall be entitled to a diploma / certificate if
+        and after I have satisfactorily completed all the requirements for
+        graduation including but not limited to the submission of my bound
+        manuscript/ special problem/ narrative reports and clearance for my
+        graduation in this University.
+      </p>
+      <div class="sign">
+        <span class="row-line"></span>
+        <div class="printname">Printed name and Signature of Applicant</div>
+      </div>
+      <div class="row-container-footer">
+        <div class="row-item">
+          <p class="m-0">Evaluated by: <span class="footer-line"></span></p>
+        </div>
+        <div class="row-item">
+          <p class="m-0">Approved by: <span class="footer-line"></span></p>
+        </div>
+        <div class="row-item">
+          <p class="m-0">Noted by: <span class="footer-line"></span></p>
+        </div>
+      </div>
+    </div>
+    <script>
+      function printPage() {
+        window.print();
+      }
+    </script>
+  </body>
+</html>

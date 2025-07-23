@@ -1,0 +1,195 @@
+
+.alumni_profile_main-content {
+    transition: margin-left 0.3s ease;
+}
+
+.alumni_sidebar.collapsed ~ .alumni_profile_main-content {
+    margin-left: 60px;
+}
+
+.alumni_sidebar_logo-img {
+    height: 60px;
+    width: auto;
+}
+
+.alumni_sidebar_top-bar {
+    position: fixed;
+    left: 250px;
+    right: 0;
+    top: 0;
+    height: 90px;
+    background-color: #183a53;
+    color: white;
+    z-index: 1035;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    transition: left 0.3s ease;
+}
+
+.alumni_sidebar.collapsed ~ .alumni_sidebar_top-bar {
+    left: 60px;
+}
+
+.alumni_sidebar_top-bar .alumni_sidebar_user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.alumni_sidebar_top-bar .alumni_sidebar_user-info i {
+    font-size: 2.5rem;
+}
+
+#alumni_sidebar_sidebarBackdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1039;
+}
+
+#alumni_sidebar_sidebarBackdrop.active {
+    display: block;
+}
+
+.alumni_sidebar_toggle-button,
+.alumni_sidebar_desktopToggle-button,
+.alumni_sidebar_topbarToggle-button {
+    background-color: #183a53;
+    border: none;
+    padding: 0.4rem 0.6rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.alumni_sidebar_toggle-button i,
+.alumni_sidebar_desktopToggle-button i,
+.alumni_sidebar_topbarToggle-button i {
+    color: white;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.alumni_sidebar_toggle-button:hover,
+.alumni_sidebar_desktopToggle-button:hover,
+.alumni_sidebar_topbarToggle-button:hover {
+    background-color: #14507d;
+}
+
+.alumni_sidebar_toggle-button:hover i,
+.alumni_sidebar_desktopToggle-button:hover i,
+.alumni_sidebar_topbarToggle-button:hover i {
+    color: #d8d8d8;
+}
+.card {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border-radius: 0.5rem;
+    
+  }
+  
+  /* Card headers */
+  .tab-header {
+    background-color: #f8f9fa;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+  
+  /* Profile image container */
+  .profile-box {
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 100%;
+    max-width: 220px;
+    height: 220px;
+    margin: 0 auto 1rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+   
+  }
+  
+  /* Profile image */
+  .profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  
+
+
+@media (max-width: 991.98px) {
+.profile-box {
+  width: 180px;
+  height: 180px;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+}
+@media (max-width: 991.98px) {
+.card-body.text-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+}
+
+  
+  #alumni_profile_calendar_iframe {
+    border-radius: 10px;
+    width: 100%;
+    height: 300px;
+    border: 0;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card {
+      margin-bottom: 1rem;
+    }
+  }
+  
+
+@media (max-width: 768px) {
+.alumni_sidebar {
+    transform: translateX(-100%);
+    width: 250px;
+    left: 0;
+}
+
+.alumni_sidebar.show {
+    transform: translateX(0%);
+}
+
+.alumni_sidebar.collapsed {
+    transform: translateX(-100%) !important;
+}
+
+.alumni_profile_main-content {
+    margin-left: 0 !important;
+    padding-top: 6.1rem !important; /* enough to clear top-bar */
+}
+
+.alumni_sidebar_top-bar,
+.alumni_sidebar.collapsed ~ .alumni_sidebar_top-bar {
+    left: 0 !important;
+}
+
+.alumni_sidebar_top-bar .alumni_sidebar_system-title,
+.alumni_sidebar_top-bar .alumni_sidebar_user-info span {
+    display: none;
+}
+}
